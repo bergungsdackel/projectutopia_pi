@@ -12,17 +12,21 @@ Kp = 1
 Ki = 1
 Kd = 1
 
-PinMotorlinks = 1
-PinMotorrechts = 2
-
-
+PinMotorlinksvorwaerts = 1
+PinMotorrechtsvorwaerts = 2
+PinMotorlinksrueckwaerts = 3
+PinMotorrechtsrueckwaerts = 4
 
 
 def BasisKonfiguration():
     GPIO.setmode(GPIO.BCM)
-    GPIO.setup(PinMotorlinks, GPIO.OUT)
+    GPIO.setup(PinMotorlinksvorwaerts, GPIO.OUT)
     GPIO.setmode(GPIO.BCM)
-    GPIO.setup(PinMotorrechts, GPIO.OUT)
+    GPIO.setup(PinMotorrechtsvorwaerts, GPIO.OUT)
+    GPIO.setmode(GPIO.BCM)
+    GPIO.setup(PinMotorlinksrueckwaerts, GPIO.OUT)
+    GPIO.setmode(GPIO.BCM)
+    GPIO.setup(PinMotorrechtsrueckwaerts, GPIO.OUT)
 
 pid=PID.PID(P, I, D)
 
@@ -33,20 +37,27 @@ def Konfiguration():
 
 def links_vorwaerts():
     time.sleep(5)
-    GPIO.output(Pinmotorlinks,1)
+    GPIO.output(Pinmotorlinksvorwaerts,1)
     time.sleep(5)
-    GPIO.output(Pinmotorlinks,0)
+    GPIO.output(Pinmotorlinksvorwaerts,0)
 
 def links_rueckwaerts():
+    time.sleep(5)
+    GPIO.output(Pinmotorlinksrueckwaerts,1)
+    time.sleep(5)
+    GPIO.output(Pinmotorlinksrueckwaerts,0)
 
 def rechts_vorwaerts():
     time.sleep(5)
-    GPIO.output(Pinmotorrechts,1)
+    GPIO.output(Pinmotorrechtsvorwaerts,1)
     time.sleep(5)
-    GPIO.output(Pinmotorrechts,0)
+    GPIO.output(Pinmotorrechtsvorwaerts,0)
 
 def rechts_rueckwaerts():
-
+    time.sleep(5)
+    GPIO.output(Pinmotorrechtssrueckwaerts,1)
+    time.sleep(5)
+    GPIO.output(Pinmotorrechtsrueckwaerts,0)
 
 while (1):
     Konfiguration()
