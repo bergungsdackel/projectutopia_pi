@@ -20,7 +20,12 @@
     <DebugSymbols>true</DebugSymbols>
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
-  <ItemGroup>
+  <ItemG    <Compile Include="PID.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="pid_control.py">
+      <SubType>Code</SubType>
+    </Compile>roup>
     <Compile Include="gyro.py">
       <SubType>Code</SubType>
     </Compile>
