@@ -21,6 +21,7 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="gyro.py" />
     <Compile Include="PID.py">
       <SubType>Code</SubType>
     </Compile>
