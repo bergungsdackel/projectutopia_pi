@@ -28,6 +28,7 @@ def BasisKonfiguration():
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(PinMotorrechtsrueckwaerts, GPIO.OUT)
 
+BasisKonfiguration()
 pid=PID.PID(P, I, D)
 
 def Konfiguration():
