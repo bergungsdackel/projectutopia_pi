@@ -5,7 +5,7 @@ import time
 
 #for x in range(0,10):
 
-
+print ("Hello world")
 PinMotorlinksvorwaerts = 1
 PinMotorrechtsvorwaerts = 2
 PinMotorlinksrueckwaerts = 3
