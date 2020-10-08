@@ -18,4 +18,3 @@ while (1):
 
     pid.update(Bewegung)
     #Motor dreh dich
-
