@@ -1,4 +1,4 @@
-print("HELLO WORimport PID
+import PID
 import pid_control
 import RPi.GPIO as GPIO
 import time
@@ -18,5 +18,3 @@ while (1):
 
     pid.update(Bewegung)
     #Motor dreh dich
-
-LD")
