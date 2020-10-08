@@ -21,6 +21,12 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="PID.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="pid_control.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="ProjectUtopia.py" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
