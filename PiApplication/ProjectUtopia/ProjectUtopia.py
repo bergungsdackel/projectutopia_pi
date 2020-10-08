@@ -2,7 +2,7 @@ import PID
 import RPi.GPIO as GPIO
 import time
 
-for x in range(0,10):
+#for x in range(0,10):
 
 
 P = 5
@@ -12,8 +12,17 @@ Kp = 1
 Ki = 1
 Kd = 1
 
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(4, GPIO.OUT)
+PinMotorlinks = 1
+PinMotorrechts = 2
+
+
+
+
+def BasisKonfiguration():
+    GPIO.setmode(GPIO.BCM)
+    GPIO.setup(PinMotorlinks, GPIO.OUT)
+    GPIO.setmode(GPIO.BCM)
+    GPIO.setup(PinMotorrechts, GPIO.OUT)
 
 pid=PID.PID(P, I, D)
 
@@ -24,12 +33,17 @@ def Konfiguration():
 
 def links_vorwaerts():
     time.sleep(5)
-GPIO.output(4,1)
-time.sleep(5)
-GPIO.output(4,0)
+    GPIO.output(Pinmotorlinks,1)
+    time.sleep(5)
+    GPIO.output(Pinmotorlinks,0)
+
 def links_rueckwaerts():
 
 def rechts_vorwaerts():
+    time.sleep(5)
+    GPIO.output(Pinmotorrechts,1)
+    time.sleep(5)
+    GPIO.output(Pinmotorrechts,0)
 
 def rechts_rueckwaerts():
 
