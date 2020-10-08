@@ -2,6 +2,7 @@ import PID
 import pid_control
 import RPi.GPIO as GPIO
 import time
+import gyro
 
 #for x in range(0,10):
 
