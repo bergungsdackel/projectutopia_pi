@@ -12,7 +12,7 @@ PinMotorrechtsvorwaerts = 6
 PinMotorlinksrueckwaerts = 13
 PinMotorrechtsrueckwaerts = 19
 
-while (1):
+while true:
     pid_control.pid_control.reglung();
     Eingang=pin1 # keinen Schimmer
     Bewegung=Eingang*2 # keinen Schimmer
