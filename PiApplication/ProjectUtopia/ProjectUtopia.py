@@ -15,15 +15,15 @@ PinMotorrechtsrueckwaerts = 19
 
 while true:
     try:
-        pid_control.pid_control.reglung();
+        #read gyroskop
+        gyro.read_gyro()
+        #
+        pid_control.pid_control.reglung(gyro.gyroskop_x_skaliert)
         Eingang=pin1 # keinen Schimmer
         Bewegung=Eingang*2 # keinen Schimmer
 
+
         #anderer thread für wifi cmds
         WifiThread = wifi.WifiModule()
-        #
         if(WifiThread.neueDaten == true):
             print("Penis")
-
-        pid.update(Bewegung)
-        #Motor dreh dich

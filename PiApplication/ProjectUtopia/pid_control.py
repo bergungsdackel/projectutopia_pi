@@ -64,8 +64,9 @@ class pid_control(object):
         print ("rechts stopp")
 
     PID.PID.init(1,2,3)
-    def reglung():
+    def reglung(eingang1, eingang2):
         PID.PID.pid(eingang)
+        geregelterWert = PID.PID.Ausgang
 
 
  
