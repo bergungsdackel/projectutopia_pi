@@ -7,4 +7,3 @@ camera=PiCamera()
 def Bild_machen():
     camera.capture('/home/pi/Desktop/image%s.jpg' % i)
     i=i+1
-
