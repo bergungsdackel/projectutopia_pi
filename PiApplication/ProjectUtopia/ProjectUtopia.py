@@ -13,7 +13,7 @@ PinMotorrechtsvorwaerts = 6
 PinMotorlinksrueckwaerts = 13
 PinMotorrechtsrueckwaerts = 19
 
-while true:
+while True:
     try:
         #read gyroskop
         gyro.read_gyro()
@@ -25,5 +25,6 @@ while true:
 
         #anderer thread für wifi cmds
         WifiThread = wifi.WifiModule()
-        if(WifiThread.neueDaten == true):
-            print("Penis")
+        if(WifiThread.neueDaten == True):
+            WifiThread.neueDaten = False
+            print(WifiThread.data)
