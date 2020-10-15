@@ -21,6 +21,9 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Kamera.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="PID.py">
       <SubType>Code</SubType>
     </Compile>
