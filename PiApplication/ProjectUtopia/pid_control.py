@@ -68,6 +68,9 @@ class pid_control(object):
     def reglung(eingang1, eingang2):
         PID.PID.pid(eingang)
         geregelterWert = PID.PID.Ausgang
+    #########################################################################################
+
+   
 
 
  

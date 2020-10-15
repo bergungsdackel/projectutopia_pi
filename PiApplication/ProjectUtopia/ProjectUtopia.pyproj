@@ -24,6 +24,9 @@
     <Compile Include="Kamera.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="motorControl.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="PID.py">
       <SubType>Code</SubType>
     </Compile>
