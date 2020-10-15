@@ -12,4 +12,6 @@ class pid_control(object):
         PID.PID.pid(eingang)
         geregelterWert = PID.PID.Ausgang
         if (geregelterWert>1):
-            #öjdgs
+            motorContol.forward(2)
+        if (geregelterWert<1):
+            motorContol.backward(-2)
