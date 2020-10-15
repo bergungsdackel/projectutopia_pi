@@ -3,6 +3,7 @@ import pid_control
 import RPi.GPIO as GPIO
 import time
 import gyro
+import wifi
 
 #for x in range(0,10):
 
@@ -13,9 +14,16 @@ PinMotorlinksrueckwaerts = 13
 PinMotorrechtsrueckwaerts = 19
 
 while true:
-    pid_control.pid_control.reglung();
-    Eingang=pin1 # keinen Schimmer
-    Bewegung=Eingang*2 # keinen Schimmer
+    try:
+        pid_control.pid_control.reglung();
+        Eingang=pin1 # keinen Schimmer
+        Bewegung=Eingang*2 # keinen Schimmer
 
-    pid.update(Bewegung)
-    #Motor dreh dich
+        #anderer thread für wifi cmds
+        WifiThread = wifi.WifiModule()
+        #
+        if(WifiThread.neueDaten == true):
+            print("Penis")
+
+        pid.update(Bewegung)
+        #Motor dreh dich
