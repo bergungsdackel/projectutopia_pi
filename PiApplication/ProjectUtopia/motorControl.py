@@ -1,4 +1,4 @@
-
+import RPi.GPIO as GPIO
 
 class motorControl(object):
 
@@ -39,20 +39,59 @@ class motorControl(object):
         self.pwmL.ChangeDutyCycle(0)
         self.pwmR.ChangeDutyCycle(0)
 
-    def setSpeed(self, speed: int):
+    def setSpeedL(self, speed: int):
         """
             speed might be -3, -2, -1, 0, 1, 2, 3
         """
         force = min(3, abs(speed))
         isForewards = speed > 0
         if (isForewards):
-            GPIO.output(self.inBackwardPin, False)
-            GPIO.output(self.inForewardPin, True)
+            GPIO.output(self.inBackwardPinL, False)
+            GPIO.output(self.inForewardPinL, True)
         else:
-            GPIO.output(self.inForewardPin, False)
-            GPIO.output(self.inBackwardPin, force > 0)
+            GPIO.output(self.inForewardPinL, False)
+            GPIO.output(self.inBackwardPinL, force > 0)
         if force > 0:
-            self.pwm.ChangeDutyCycle(70 + (10 * force))
+            self.pwmL.ChangeDutyCycle(70 + (10 * force))
         else:
-            self.pwm.ChangeDutyCycle(0)
+            self.pwmL.ChangeDutyCycle(0)
+        
+    def setSpeedR(self, speed: int):
+        """
+            speed might be -3, -2, -1, 0, 1, 2, 3
+        """
+        force = min(3, abs(speed))
+        isForewards = speed > 0
+        if (isForewards):
+            GPIO.output(self.inBackwardPinR, False)
+            GPIO.output(self.inForewardPinR, True)
+        else:
+            GPIO.output(self.inForewardPinR, False)
+            GPIO.output(self.inBackwardPinR, force > 0)
+        if force > 0:
+            self.pwmR.ChangeDutyCycle(70 + (10 * force))
+        else:
+            self.pwmR.ChangeDutyCycle(0)
 
+    def setSpeed(speed: int):
+        setSpeedL(speed)
+        setSpeedR(speed)
+
+    def turnLeft(speed: int):
+        setSpeedL(0)
+        setSpeedR(speed)
+
+    def turnRight(speed: int):
+        setSpeedR(0)
+        setSpeedL(speed)
+
+    def forward(speed):
+        if(speed > 0):
+            setSpeed(speed)
+
+    def backward(speed):
+        if(speed < 0):
+            setSpeed(speed)
+
+    def stopp():
+        setSpeed(0)

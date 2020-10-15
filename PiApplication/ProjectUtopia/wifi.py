@@ -29,5 +29,5 @@ class WifiModule(threading.Thread):
             if(data != None):
                 neueDaten = True
                 if(data == "FORWARD"):
-                    
+                    print(" ")
 
