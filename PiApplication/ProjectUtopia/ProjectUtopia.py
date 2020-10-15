@@ -6,11 +6,11 @@ import gyro
 
 #for x in range(0,10):
 
-
-PinMotorlinksvorwaerts = 1
-PinMotorrechtsvorwaerts = 2
-PinMotorlinksrueckwaerts = 3
-PinMotorrechtsrueckwaerts = 4
+print ("Hello world")
+PinMotorlinksvorwaerts = 5
+PinMotorrechtsvorwaerts = 6
+PinMotorlinksrueckwaerts = 13
+PinMotorrechtsrueckwaerts = 19
 
 while true:
     pid_control.pid_control.reglung();
