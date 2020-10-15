@@ -2,6 +2,21 @@ import smbus
 import math
 
 
+gyroskop_x = None
+gyroskop_y = None
+gyroskop_z = None
+gyroskop_x_skaliert = None
+gyroskop_y_skaliert = None
+gyroskop_z_skaliert = None
+beschleunigung_x = None
+beschleunigung_y = None
+beschleunigung_z = None
+beschleunigung_x_skaliert = None
+beschleunigung_y_skaliert = None
+beschleunigung_z_skaliert = None
+x_rotation = None
+y_rotation = None
+
 def init_gyro():
     # Register
     power_mgmt_1 = 0x6b
