@@ -4,7 +4,6 @@ import PID
 import ProjectUtopia
 class pid_control(object):
 
-
     def BasisKonfiguration():
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(PinMotorlinksvorwaerts, GPIO.OUT)
