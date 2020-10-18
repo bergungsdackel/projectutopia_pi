@@ -10,6 +10,10 @@ class motorControl(object):
     enPinL = None
     pwmL = None
     pwmR = None
+    drivingForward = False
+    drivingBackward = False
+    drivingLeft = False
+    drivingRight = False
 
     def __init__(self, enPinL: int,enPinR: int, inForewardPinL: int, inBackwardPinL: int,inForewardPinR: int, inBackwardPinR: int):
         GPIO.setup(inForewardPinL, GPIO.OUT)
@@ -78,19 +82,35 @@ class motorControl(object):
         setSpeedR(speed)
 
     def turnLeft(speed: int):
+        drivingForward = False
+        drivingBackward = False
+        drivingLeft = True
+        drivingRight = False
         setSpeedL(0)
         setSpeedR(speed)
 
     def turnRight(speed: int):
+        drivingForward = False
+        drivingBackward = False
+        drivingLeft = False
+        drivingRight = True
         setSpeedR(0)
         setSpeedL(speed)
 
     def forward(speed):
         if(speed > 0):
+            drivingForward = True
+            drivingBackward = False
+            drivingLeft = False
+            drivingRight = False
             setSpeed(speed)
 
     def backward(speed):
         if(speed < 0):
+            drivingForward = False
+            drivingBackward = True
+            drivingLeft = False
+            drivingRight = False
             setSpeed(speed)
 
     def stopp():
