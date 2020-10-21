@@ -2,24 +2,22 @@ import time
 import PID
 import motorControl
 import ProjectUtopia
+import gyro
 
 
 class pid_control(object):
 
+    def __init__(self, Kp, Ki, Kd, motors : motorControl):
+        self.Kp     =    Kp
+        self.Ki     =    Ki
+        self.kd     =    Kd
+        PID.PID.init(Kp,Ki,Kd)
+        motors      =   motors
 
-    PID.PID.init(1,2,3)
-    def reglung(eingang1, eingang2):
-        PID.PID.pid(eingang)
+    def reglung(self, x_rotation):
+        PID.PID.pid(x_rotation)
         geregelterWert = PID.PID.Ausgang
-        if (geregelterWert < 0.5 and geregelterWert > 0):
-            motorContol.forward(1)
-        if (geregelterWert > -0.5 and geregelterWert < 0):
-            motorContol.backward(-1)
-        if (geregelterWert < 1 and geregelterWert > 0.5):
+        if (geregelterWert>1):
             motorContol.forward(2)
-        if (geregelterWert > -1 and geregelterWert < -0.5):
+        if (geregelterWert<1):
             motorContol.backward(-2)
-        if (geregelterWert < 1.5 and geregelterWert > 1):
-            motorContol.forward(3)
-        if (geregelterWert > -1.5 and geregelterWert < -1):
-            motorContol.backward(-3)
