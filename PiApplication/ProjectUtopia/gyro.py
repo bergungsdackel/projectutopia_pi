@@ -17,7 +17,7 @@ beschleunigung_z_skaliert = None
 x_rotation = None
 y_rotation = None
 
-def init_gyro():
+def __init__():
     # Register
     power_mgmt_1 = 0x6b
     power_mgmt_2 = 0x6c
@@ -27,6 +27,7 @@ def init_gyro():
 
     # Aktivieren, um das Modul ansprechen zu koennen
     bus.write_byte_data(address, power_mgmt_1, 0)
+    print("Gyroskop iniziiert")
 
 
 #Methoden

@@ -42,6 +42,8 @@ class motorControl(object):
         self.pwmR.start(0)
         self.pwmL.ChangeDutyCycle(0)
         self.pwmR.ChangeDutyCycle(0)
+        print("motorcontrol iniziiert")
+
 
     def setSpeedL(self, speed: int):
         """
@@ -80,6 +82,8 @@ class motorControl(object):
     def setSpeed(speed: int):
         setSpeedL(speed)
         setSpeedR(speed)
+        print("Geschwindigkeit auf %f" % speed)
+
 
     def turnLeft(speed: int):
         drivingForward = False
@@ -88,6 +92,8 @@ class motorControl(object):
         drivingRight = False
         setSpeedL(0)
         setSpeedR(speed)
+        print("links drehen")
+
 
     def turnRight(speed: int):
         drivingForward = False
@@ -96,6 +102,7 @@ class motorControl(object):
         drivingRight = True
         setSpeedR(0)
         setSpeedL(speed)
+        print("rechts drehen")
 
     def forward(speed):
         if(speed > 0):
@@ -104,6 +111,7 @@ class motorControl(object):
             drivingLeft = False
             drivingRight = False
             setSpeed(speed)
+            print("Vorwaerts")
 
     def backward(speed):
         if(speed < 0):
@@ -112,6 +120,7 @@ class motorControl(object):
             drivingLeft = False
             drivingRight = False
             setSpeed(speed)
+            print("Rueckwaerts")
 
     def stopp():
         setSpeed(0)
