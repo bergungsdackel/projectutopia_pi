@@ -13,6 +13,8 @@ class pid_control(object):
         self.Kd     =    Kd
         self.PID_CLASS = PID.PID(Kp,Ki,Kd)
         self.motors      =   motors
+        self.speedlinks = 0
+        self.speedrechts = 0
         print("Kp = {0}".format(self.Kp))
         print("Ki = {0}".format(self.Ki))
         print("Kd = {0}".format(self.Kd))
@@ -31,33 +33,33 @@ class pid_control(object):
 
         #geregelterWert = self.PID_CLASS.Ausgang
 
-        if(turn<0 and speed>0):
-            speedlinks = max(0,speed + turn)
-            speedrechts = speed
-        if(turn>0 and speed>0):
-            speedrechts = max(0,speed - turn)
-            speedlinks = speed
-        if(turn<0 and speed<0):
-            speedlinks = min(0,speed - turn)
-            speedrechts = speed
-        if(turn>0 and speed<0):
-            speedrechts = min(0, speed + turn)
-            speedlinks = speed
-        if (speed==0 and turn != 0):
-            speedlinks = turn
-            speedrechts = -turn
-        if (turn==0 and speed != 0):
-            speedlinks = speed
-            speedrechts = speed
-        if(speed==0 and turn==0):
-            speedlinks = 0
-            speedrechts = 0
+        if (turn < 0 and speed > 0):
+            self.speedlinks = max(0,speed + turn)
+            self.speedrechts = speed
+        elif (turn > 0 and speed > 0):
+            self.speedrechts = max(0,speed - turn)
+            self.speedlinks = speed
+        elif (turn < 0 and speed < 0):
+            self.speedlinks = min(0,speed - turn)
+            self.speedrechts = speed
+        elif (turn > 0 and speed < 0):
+            self.speedrechts = min(0, speed + turn)
+            self.speedlinks = speed
+        elif (speed == 0 and turn != 0):
+            self.speedlinks = turn
+            self.speedrechts = -turn
+        elif (turn == 0 and speed != 0):
+            self.speedlinks = speed
+            self.speedrechts = speed
+        else:
+            self.speedlinks = 0
+            self.speedrechts = 0
 
-        print("Speedlinks %d" % speedlinks)
-        print("Speedrechts %d" % speedrechts)
+        print("Speedlinks %d" % self.speedlinks)
+        print("Speedrechts %d" % self.speedrechts)
 
-        self.motors.motorControl.setSpeedL(self, speedlinks+self.motoranpassung(x_rotation))
-        self.motors.motorControl.setSpeedR(self, speedrechts+self.motoranpassung(x_rotation))
+        self.motors.motorControl.setSpeedL(self, self.speedlinks + self.motoranpassung(x_rotation))
+        self.motors.motorControl.setSpeedR(self, self.speedrechts + self.motoranpassung(x_rotation))
 
        
 #        if(not self.motors.drivingForward and not self.motors.drivingBackward and not self.motors.drivingLeft and not self.motors.drivingRight) :
