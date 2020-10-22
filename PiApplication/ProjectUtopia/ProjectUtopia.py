@@ -10,7 +10,7 @@ import Kamera
 
 #for x in range(0,10):
 
-print ('PI Lebt')
+print ("PI Lebt")
 PinMotorlinksvorwaerts = 5
 PinMotorrechtsvorwaerts = 6
 PinMotorlinksrueckwaerts = 13
