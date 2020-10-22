@@ -17,6 +17,7 @@ class WifiModule(threading.Thread):
         sock = socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
         sock.bind((UDP_IP, UDP_PORT))
         self.start()
+        print("Wifi iniziiert")
 
     def run(self):
         print("Warte auf Daten von Smartphone...")
