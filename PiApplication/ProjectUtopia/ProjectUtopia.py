@@ -36,7 +36,7 @@ while True:
         #anderer thread für wifi cmds
         if(WifiThread.neueDaten == True):
 
-            print(WifiThread.targetSpeed) #vorwärts oder rückwärts je nach vorzeichen
+            print(WifiThread.targetSpeedFB) #vorwärts oder rückwärts je nach vorzeichen
             print(WifiThread.rotateStrength) #links oder rechts mit welcher Geschw. je nach Vorzeichen
             WifiThread.neueDaten = False #daten wurden verarbeitet, also kann WifiClass wieder empfangen
 
