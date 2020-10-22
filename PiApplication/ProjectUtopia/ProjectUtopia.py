@@ -29,8 +29,8 @@ while True:
         gyro.read_gyro()
         #
         Distanz = EchoClass.Distanz()
-        speed=wifi.speed()
-        turn=wifi.turn()
+        speed = WifiThread.targetSpeedFB
+        turn = WifiThread.rotateStrength
         PID_CONTROL_CLASS.reglung(gyro.gyroskop_x_skaliert, speed, turn)
 
         #anderer thread für wifi cmds
