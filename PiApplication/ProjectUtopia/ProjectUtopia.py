@@ -32,13 +32,13 @@ while True:
 
         PID_CONTROL_CLASS.reglung(gyro.gyroskop_x_skaliert)
 
-
         #anderer thread für wifi cmds
         if(WifiThread.neueDaten == True):
-            WifiThread.neueDaten = False
-            print(WifiThread.data)
 
+            print(WifiThread.targetSpeed) #vorwärts oder rückwärts je nach vorzeichen
+            print("Rotiere" + WifiThread.rotate + " mit Geschw. " + WifiThread.rotateStrength) #links oder rechts mit welcher Geschw.
+            WifiThread.neueDaten = False #daten wurden verarbeitet, also kann WifiClass wieder empfangen
 
         #
-        time.sleep(5)
+        #time.sleep(5)
             
