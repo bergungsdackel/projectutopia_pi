@@ -10,6 +10,8 @@ class WifiModule(threading.Thread):
     sock = None
     data = None
 
+
+
     def __init__(self):
         threading.Thread.__init__(self)
         self.daemon = True
@@ -18,6 +20,8 @@ class WifiModule(threading.Thread):
         sock.bind((UDP_IP, UDP_PORT))
         self.start()
         print("Wifi iniziiert")
+        speed = None
+        turn = None
 
     def run(self):
         print("Warte auf Daten von Smartphone...")
@@ -31,4 +35,8 @@ class WifiModule(threading.Thread):
                 neueDaten = True
                 if(data == "FORWARD"):
                     print(" ")
-
+    def speed():
+        return speed
+    
+    def turn():
+        return turn
