@@ -7,11 +7,11 @@ import gyro
 
 class pid_control(object):
 
-    def init(Kp, Ki, Kd, motors : motorControl, self):#self am ende, damit man werte übergeben kann?
+    def __init__(self, Kp, Ki, Kd, motors : motorControl):#self am ende, damit man werte übergeben kann?
         self.Kp     =    Kp
         self.Ki     =    Ki
         self.kd     =    Kd
-        PID.PID.init(Kp,Ki,Kd)
+        PID_CLASS = PID.PID(Kp,Ki,Kd)
         motors      =   motors
         print("Kp = ")
         print("Ki = ")

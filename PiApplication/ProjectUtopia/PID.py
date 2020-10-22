@@ -11,7 +11,7 @@ class PID(object):
     Regeldifferenz = 0
     Regeldifferenz_vorher = 0
 
-    def init(Kp, Ki, Kd, self):#self am ende, damit man werte übergeben kann?
+    def __init__(self, Kp, Ki, Kd):#self am ende, damit man werte übergeben kann?
         Kp=Kp
         Ki=Ki
         Kd=Kd
