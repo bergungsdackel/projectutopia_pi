@@ -10,45 +10,52 @@ class pid_control(object):
     def __init__(self, Kp, Ki, Kd, motors : motorControl):#self am ende, damit man werte übergeben kann?
         self.Kp     =    Kp
         self.Ki     =    Ki
-        self.kd     =    Kd
-        PID_CLASS = PID.PID(Kp,Ki,Kd)
-        motors      =   motors
-        print("Kp = ")
-        print("Ki = ")
-        print("Kd = ")
+        self.Kd     =    Kd
+        self.PID_CLASS = PID.PID(Kp,Ki,Kd)
+        self.motors      =   motors
+        print("Kp = {0}".format(self.Kp))
+        print("Ki = {0}".format(self.Ki))
+        print("Kd = {0}".format(self.Kd))
         print("pid_control iniziiert")
 
 
     def reglung (self, x_rotation) :
-        PID.PID.pid(x_rotation)
-        geregelterWert = PID.PID.Ausgang
 
-        if(not motors.drivingForward and not motors.drivingBackward and not motors.drivingLeft and not motors.drivingRight) :
-            print('balance mode')
-            if(gergeregelterWert==0):
-                motors.setspeed(0)
-            elif (geregelterWert>1):
-                motors.forward(2)
-            elif (geregelterWert<1):
-                motors.backward(-2)
-        elif(motors.drivingForward and not motors.drivingBackward and not motors.drivingLeft and not motors.drivingRight):
+        self.PID_CLASS.pid(x_rotation)
+
+        geregelterWert = self.PID_CLASS.Ausgang
+
+        if(not self.motors.drivingForward and not self.motors.drivingBackward and not self.motors.drivingLeft and not self.motors.drivingRight) :
+            print("balance mode")
+            if(gergeregelterWert == 0):
+                self.motors.setspeed(0)
+            elif (geregelterWert > 1):
+                self.motors.forward(2)
+            elif (geregelterWert < 1):
+                self.motors.backward(-2)
+
+        elif(self.motors.drivingForward and not self.motors.drivingBackward and not self.motors.drivingLeft and not self.motors.drivingRight):
             #drive forward
-            print('pid driving forward')
-        elif(not motors.drivingForward and motors.drivingBackward and not motors.drivingLeft and not motors.drivingRight):
+            print("pid driving forward")
+
+        elif(not self.motors.drivingForward and self.motors.drivingBackward and not self.motors.drivingLeft and not self.motors.drivingRight):
             #drive backward
-            print('pid driving backward')
-        elif(not motors.drivingForward and not motors.drivingBackward and not motors.drivingLeft and motors.drivingRight):
+            print("pid driving backward")
+
+        elif(not self.motors.drivingForward and not self.motors.drivingBackward and not self.motors.drivingLeft and self.motors.drivingRight):
             #drive right
-            print('pid driving right')
-        elif(not motors.drivingForward and not motors.drivingBackward and motors.drivingLeft and not motors.drivingRight):
+            print("pid driving right")
+
+        elif(not self.motors.drivingForward and not self.motors.drivingBackward and self.motors.drivingLeft and not self.motors.drivingRight):
              #drive left
-             print('pid driving left')
+             print("pid driving left")
+
         else:
             #Balance
-            print('balance mode')
+            print("balance mode")
             if(gergeregelterWert==0):
-                motors.setspeed(0)
+                self.motors.setspeed(0)
             elif (geregelterWert>1):
-                motors.forward(2)
+                self.motors.forward(2)
             elif (geregelterWert<1):
-                motors.backward(-2)
+                self.motors.backward(-2)

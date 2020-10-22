@@ -1,26 +1,26 @@
 import time
 
 class PID(object):
-    Kp = 0
-    Ki = 0
-    Kd = 0
-    Buffer = 0
-    Eingang_vorher = 0
-    zeitfüreinendurchlauf = 2
-    Ausgang = 0
-    Regeldifferenz = 0
-    Regeldifferenz_vorher = 0
 
     def __init__(self, Kp, Ki, Kd):#self am ende, damit man werte übergeben kann?
-        Kp=Kp
-        Ki=Ki
-        Kd=Kd
+        self.Kp=Kp
+        self.Ki=Ki
+        self.Kd=Kd
+
+        self.Buffer = 0
+        self.Eingang_vorher = 0
+        self.zeitfüreinendurchlauf = 2
+        self.Ausgang = 0
+        self.Regeldifferenz = 0
+        self.Regeldifferenz_vorher = 0
+
+
         print("PID iniziiert")
         
     def pid(self,Eingang):
-        Regeldifferenz = Eingang-Ausgang
-        Buffer = Regeldifferenz+Buffer
-        Ausgang = Kp*Regeldifferenz+Ki*Buffer+Kd*((Regeldifferenz-Regeldifferenz_vorher)/2)
-        Regeldifferenz_vorher = Regeldifferenz
-        print("Ausgang = %f" % Ausgang)
+        self.Regeldifferenz = Eingang - self.Ausgang
+        self.Buffer = self.Regeldifferenz+self.Buffer
+        self.Ausgang = self.Kp * self.Regeldifferenz + self.Ki * self.Buffer + self.Kd * ((self.Regeldifferenz - self.Regeldifferenz_vorher) / self.zeitfüreinendurchlauf)
+        self.Regeldifferenz_vorher = self.Regeldifferenz
+        print("Ausgang = {0}".format(self.Ausgang))
 

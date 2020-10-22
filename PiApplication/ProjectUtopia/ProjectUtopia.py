@@ -11,26 +11,34 @@ import Kamera
 #for x in range(0,10):
 
 print ("PI Lebt")
-PinMotorlinksvorwaerts = 5
-PinMotorrechtsvorwaerts = 6
-PinMotorlinksrueckwaerts = 13
-PinMotorrechtsrueckwaerts = 19
-PinEnMotorLeft = 4 #Nicht festgelegt
-PinEnMotorRight = 7 #Nicht festgelegt
+PinMotorlinksvorwaerts = 29
+PinMotorrechtsvorwaerts = 31
+PinMotorlinksrueckwaerts = 33
+PinMotorrechtsrueckwaerts = 35
+PinEnMotorLeft = 37
+PinEnMotorRight = 38
 motorcontrol = motorControl(PinEnMotorLeft, PinEnMotorRight, PinMotorlinksvorwaerts, PinMotorlinksrueckwaerts, PinMotorrechtsvorwaerts, PinMotorrechtsrueckwaerts)
-pid_control.pid_control.init(1,2,3,motorcontrol)
+PID_CONTROL_CLASS = pid_control.pid_control(1,2,3,motorcontrol)
+
+WifiThread = wifi.WifiModule()
+EchoClass = Echo.Echo()
 
 while True:
     try:
         #read gyroskop
         gyro.read_gyro()
         #
-        pid_control.pid_control.reglung(gyro.gyroskop_x_skaliert)
-        Distanz=Echo.Echo.Distanz()
+        Distanz = EchoClass.Distanz()
+
+        PID_CONTROL_CLASS.reglung(gyro.gyroskop_x_skaliert)
 
 
         #anderer thread für wifi cmds
-        WifiThread = wifi.WifiModule()
         if(WifiThread.neueDaten == True):
             WifiThread.neueDaten = False
-            print(WifiThread.data)#funktioniert das so?
+            print(WifiThread.data)
+
+
+        #
+        time.sleep(5)
+            
