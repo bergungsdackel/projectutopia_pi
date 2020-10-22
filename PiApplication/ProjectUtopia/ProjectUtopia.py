@@ -37,7 +37,7 @@ while True:
         if(WifiThread.neueDaten == True):
 
             print(WifiThread.targetSpeed) #vorwärts oder rückwärts je nach vorzeichen
-            print("Rotiere" + WifiThread.rotate + " mit Geschw. " + WifiThread.rotateStrength) #links oder rechts mit welcher Geschw.
+            print(WifiThread.rotateStrength) #links oder rechts mit welcher Geschw. je nach Vorzeichen
             WifiThread.neueDaten = False #daten wurden verarbeitet, also kann WifiClass wieder empfangen
 
         #

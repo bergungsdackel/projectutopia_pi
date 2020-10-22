@@ -11,7 +11,6 @@ class WifiModule(threading.Thread):
     sock = None
     data = None
     targetSpeedFB = None
-    rotate = "unknown"
     rotateStrength = None
 
     def __init__(self):
@@ -42,11 +41,9 @@ class WifiModule(threading.Thread):
                     elif(directionL == "B"):
                         targetSpeedFB = -(strengthL)
                     if(directionR == "L"):
-                        rotate = "left"
-                        rotateStrength = strengthR
+                        rotateStrength = strengthR #-10 ist links
                     elif(directionR == "R"):
-                        rotate = "right"
-                        rotateStrength = strengthR
+                        rotateStrength = -(strengthR)
 
                     neueDaten = True
 
