@@ -79,3 +79,18 @@ def read_gyro():
 
     x_rotation = get_x_rotation(beschleunigung_x_skaliert, beschleunigung_y_skaliert, beschleunigung_z_skaliert)
     y_rotation = get_y_rotation(beschleunigung_x_skaliert, beschleunigung_y_skaliert, beschleunigung_z_skaliert)
+    
+    print("gyroskop_x = %f" % gyroskop_x)
+    print("gyroskop_y = %f" % gyroskop_y)
+    print("gyroskop_z = %f" % gyroskop_z)
+    print("gyroskop_x_skaliert = %f" % gyroskop_x_skaliert)
+    print("gyroskop_y_skaliert = %f" % gyroskop_y_skaliert)
+    print("gyroskop_z_skaliert = %f" % gyroskop_z_skaliert)
+    print("beschleunigung_x = %f" % beschleunigung_x)
+    print("beschleunigung_y = %f" % beschleunigung_x)
+    print("beschleunigung_z = %f" % beschleunigung_x)
+    print("beschleunigung_x_skaliert = %f" % beschleunigung_x_skaliert)
+    print("beschleunigung_y_skaliert = %f" % beschleunigung_x_skaliert)
+    print("beschleunigung_z_skaliert = %f" % beschleunigung_x_skaliert)
+    print("x_rotation = %f" % x_rotation)
+    print("y_rotation = %f" % y_rotation)

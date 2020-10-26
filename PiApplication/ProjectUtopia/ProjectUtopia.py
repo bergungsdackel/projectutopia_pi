@@ -29,16 +29,17 @@ while True:
         gyro.read_gyro()
         #
         Distanz = EchoClass.Distanz()
-
-        PID_CONTROL_CLASS.reglung(gyro.gyroskop_x_skaliert)
-
+        speed = WifiThread.targetSpeedFB
+        turn = WifiThread.rotateStrength
+        PID_CONTROL_CLASS.reglung(gyro.gyroskop_x_skaliert, speed, turn)
 
         #anderer thread für wifi cmds
         if(WifiThread.neueDaten == True):
-            WifiThread.neueDaten = False
-            print(WifiThread.data)
 
+            print(WifiThread.targetSpeedFB) #vorwärts oder rückwärts je nach vorzeichen
+            print(WifiThread.rotateStrength) #links oder rechts mit welcher Geschw. je nach Vorzeichen
+            WifiThread.neueDaten = False #daten wurden verarbeitet, also kann WifiClass wieder empfangen
 
         #
-        time.sleep(5)
+        #time.sleep(5)
             
