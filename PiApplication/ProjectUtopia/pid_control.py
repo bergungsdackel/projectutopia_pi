@@ -34,20 +34,23 @@ class pid_control(object):
         #geregelterWert = self.PID_CLASS.Ausgang
 
         if (turn < 0 and speed > 0):
+            self.speedrechts = max(0,speed + turn)
+            self.speedlinks = speed
+        elif (turn > 0 and speed > 0):
             self.speedlinks = max(0,speed + turn)
             self.speedrechts = speed
-        elif (turn > 0 and speed > 0):
-            self.speedrechts = max(0,speed - turn)
-            self.speedlinks = speed
         elif (turn < 0 and speed < 0):
             self.speedlinks = min(0,speed - turn)
             self.speedrechts = speed
         elif (turn > 0 and speed < 0):
-            self.speedrechts = min(0, speed + turn)
+            self.speedrechts = min(0, speed - turn)
             self.speedlinks = speed
-        elif (speed == 0 and turn != 0):
+        elif (speed == 0 and turn > 0):
             self.speedlinks = turn
             self.speedrechts = -turn
+        elif (speed == 0 and turn < 0):
+            self.speedlinks = -turn
+            self.speedrechts = turn
         elif (turn == 0 and speed != 0):
             self.speedlinks = speed
             self.speedrechts = speed
