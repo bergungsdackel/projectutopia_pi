@@ -13,7 +13,6 @@ class Echo(object):
         print("Ultraschall Messer iniziiert")
 
     def Distanz(self):
-
         GPIO.output(trigger,True)
         time.sleep(0.00001)
         GPIO.output(trigger,False)

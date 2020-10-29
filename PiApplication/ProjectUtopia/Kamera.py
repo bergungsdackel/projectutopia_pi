@@ -1,13 +1,21 @@
-from picamera import PiCamera
+import picamera
 from time import sleep
 
-i=0
-camera=PiCamera()
 
-def __init__(self):
-    print("Kamera iniziiert")
+class camera(object):
+    
+    def __init__(self):
+        self.PiCamera = picamera.PiCamera()
+        print("Kamera iniziiert")
+        self.AufnahmezeitInSekunden = 5
 
-def Bild_machen():
-    camera.capture('/home/pi/Desktop/image%s.jpg' % i)
-    i=i+1
+    def Bild_machen():
+        self.PiCamera.capture('/home/pi/Desktop/image%s.jpg' % i)
+        i=i+1
 
+    def Video_machen():
+        #Video der Länge 5 Sekunden
+        self.PiCamera.resolution = (1920, 1080)
+        self.PiCamera.start_recording('test.h264')
+        self.PiCamera.wait_recording(AufnahmezeitInSekunden)
+        self.PiCamera.stop_recording()
