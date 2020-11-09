@@ -6,7 +6,7 @@ import time
 class WifiModule(threading.Thread):
 
     neueDaten = None
-    UDP_IP = "127.0.0.1"
+    UDP_IP = ""
     UDP_PORT = 5005
     sock = None
     data = None
@@ -46,6 +46,4 @@ class WifiModule(threading.Thread):
                         rotateStrength = -(strengthR)
 
                     neueDaten = True
-
-                time.sleep(0.005) #kurz warten bis neue Daten ankommen
                
