@@ -13,8 +13,8 @@ class WifiModule(threading.Thread):
         self.UDP_PORT = 12345
         self.sock = None
         self.data = None
-        self.targetSpeedFB = None
-        self.rotateStrength = None
+        self.targetSpeedFB = 0
+        self.rotateStrength = 0
 
         self.sock = socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
         self.sock.bind((self.UDP_IP,self.UDP_PORT))

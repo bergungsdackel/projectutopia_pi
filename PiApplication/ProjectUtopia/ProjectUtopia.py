@@ -25,19 +25,23 @@ PID_CONTROL_CLASS = pid_control.pid_control(1,2,3,motorcontrol)
 
 WifiThread = wifi.WifiModule()
 EchoClass = Echo.Echo(PinEchoTrigger, PinEchoEcho)
-GyroClass = gyro.gyro()
+#GyroClass = gyro.gyro()
 
 while True:
     try:
         #read gyroskop
-        GyroClass.read_gyro()
+        #GyroClass.read_gyro()
         #
+        print("0")
         Distanz = EchoClass.Distanz()
+        print(str(Distanz))
         speed = WifiThread.targetSpeedFB
+        print("1")
         turn = WifiThread.rotateStrength
-        PID_CONTROL_CLASS.reglung(GyroClass.gyroskop_x_skaliert, speed, turn)        
-        
-
+        #PID_CONTROL_CLASS.reglung(GyroClass.gyroskop_x_skaliert, speed, turn)        
+        print("2")
+        PID_CONTROL_CLASS.reglung(2, speed, turn)
+        print("3")
         #anderer thread für wifi cmds
         if(WifiThread.neueDaten == True):
                 
@@ -46,7 +50,7 @@ while True:
             WifiThread.neueDaten = False #daten wurden verarbeitet, also kann WifiClass wieder empfangen
         #time.sleep(5)
     except Exception as e:
-        print(str(e))
+        print("error:"+str(e))
         GPIO.cleanup()
         break
         
