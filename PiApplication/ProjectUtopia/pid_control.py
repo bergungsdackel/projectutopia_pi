@@ -1,7 +1,6 @@
 import time
 import PID
 import motorControl
-import ProjectUtopia
 import gyro
 
 

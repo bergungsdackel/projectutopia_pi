@@ -2,13 +2,15 @@ import RPi.GPIO as GPIO
 import time
 
 class Echo(object):
-    trigger = 8
-    echo = 10
+    
 
 
-    def __init__(self):
+    def __init__(self, trigger, echo):
+        GPIO.setmode(GPIO.BOARD)
         GPIO.setup(trigger, GPIO.OUT)
         GPIO.setup(echo, GPIO.IN)
+        self.trigger = trigger
+        self.echo = echo
         GPIO.output(trigger,False)
         print("Ultraschall Messer iniziiert")
         print("test")
