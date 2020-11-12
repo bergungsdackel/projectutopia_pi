@@ -2,48 +2,65 @@ import threading
 import socket
 import time
 
-
 class WifiModule(threading.Thread):
-
-    neueDaten = None
-    UDP_IP = ""
-    UDP_PORT = 5005
-    sock = None
-    data = None
-    targetSpeedFB = None
-    rotateStrength = None
 
     def __init__(self):
         threading.Thread.__init__(self)
         self.daemon = True
-        neueDaten = False
+
+        #VAR INIT
+        self.UDP_IP = ""
+        self.UDP_PORT = 12345
+        self.sock = None
+        self.data = None
+        self.targetSpeedFB = None
+        self.rotateStrength = None
+
         self.sock = socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
-        self.sock.bind((UDP_IP, UDP_PORT))
+        self.sock.bind((self.UDP_IP,self.UDP_PORT))
         self.start()
+
         print("Wifi iniziiert")
 
     def run(self):
+
+        global neueDaten
+        neueDaten = False
+
+        hostname = socket.gethostname()
+        local_ip = socket.gethostbyname(hostname)
+        print("Eigene IP: " + local_ip)
         print("Warte auf Daten von Smartphone...")
         while True:
 
             if(neueDaten == False):
 
-                self.data, self.addr = self.sock.recvfrom(1024) # buffer size is 1024 bytes
+                self.data, (self.ip, self.port) = self.sock.recvfrom(1024) # buffer size is 1024 bytes
                 print("received message: %s" % self.data)
-                print("received from: %s" % self.addr)
+                print("received from: {0}:{1}".format(str(self.ip), str(self.port)))
 
                 if(self.data != None):
-                    lesbarerString = self.data.decode("utf-8")
-                    strengthL, directionL, strengthR, directionR = lesbarerString.split("|")
+                    length = len(self.data)
 
-                    if(directionL == "F"):
-                        targetSpeedFB = strengthL
-                    elif(directionL == "B"):
-                        targetSpeedFB = -(strengthL)
-                    if(directionR == "L"):
-                        rotateStrength = strengthR #-10 ist links
-                    elif(directionR == "R"):
-                        rotateStrength = -(strengthR)
+                    if(length == 4 or length == 8):
+                        print("Schicke {0} Bytes zurück an {1}:{2}".format(length, self.ip, self.port))
+                        sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+                        sock.sendto(self.data, (self.ip, self.port))
+                        neueDaten = True
+                    elif(self.data.decode("utf-8").count("|") == 3):
 
-                    neueDaten = True
+                        strengthL, directionL, strengthR, directionR = lesbarerString.split("|")
+
+                        if(directionL == "F"):
+                            targetSpeedFB = strengthL
+                        elif(directionL == "B"):
+                            targetSpeedFB = -(strengthL)
+                        if(directionR == "L"):
+                            rotateStrength = strengthR #-10 ist links
+                        elif(directionR == "R"):
+                            rotateStrength = -(strengthR)
+
+                        neueDaten = True
+                    else:
+                        error = True;
                
