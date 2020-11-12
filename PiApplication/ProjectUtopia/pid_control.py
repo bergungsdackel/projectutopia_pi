@@ -6,7 +6,7 @@ import gyro
 
 class pid_control(object):
 
-    def __init__(self, Kp, Ki, Kd, motors : motorControl):#self am ende, damit man werte übergeben kann?
+    def __init__(self, Kp, Ki, Kd, motors : motorControl):
         self.Kp     =    Kp
         self.Ki     =    Ki
         self.Kd     =    Kd
@@ -55,9 +55,9 @@ class pid_control(object):
 
        print("Speedlinks %d" % self.speedlinks)
        print("Speedrechts %d" % self.speedrechts)
-
-       self.motors.setSpeedL(self.speedlinks + self.motoranpassung(x_rotation))
-       self.motors.setSpeedR(self.speedrechts + self.motoranpassung(x_rotation))
+       motoranpassung = self.motoranpassung(x_rotation)
+       self.motors.setSpeedL(self.speedlinks + motoranpassung)
+       self.motors.setSpeedR(self.speedrechts + motoranpassung)
 
        
 #        if(not self.motors.drivingForward and not self.motors.drivingBackward and not self.motors.drivingLeft and not self.motors.drivingRight) :
