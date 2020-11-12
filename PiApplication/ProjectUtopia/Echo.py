@@ -11,6 +11,7 @@ class Echo(object):
         GPIO.setup(echo, GPIO.IN)
         GPIO.output(trigger,False)
         print("Ultraschall Messer iniziiert")
+        print("test")
 
     def Distanz(self):
         GPIO.output(trigger,True)
