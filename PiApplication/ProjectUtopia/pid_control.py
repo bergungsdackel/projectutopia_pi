@@ -33,36 +33,33 @@ class pid_control(object):
 
         #geregelterWert = self.PID_CLASS.Ausgang
 
-        if (turn < 0 and speed > 0):
-            self.speedrechts = max(0,speed + turn)
-            self.speedlinks = speed
-        elif (turn > 0 and speed > 0):
+       if (turn < 0 and speed > 0):
             self.speedlinks = max(0,speed + turn)
             self.speedrechts = speed
-        elif (turn < 0 and speed < 0):
+       elif (turn > 0 and speed > 0):
+            self.speedrechts = max(0,speed - turn)
+            self.speedlinks = speed
+       elif (turn < 0 and speed < 0):
             self.speedlinks = min(0,speed - turn)
             self.speedrechts = speed
-        elif (turn > 0 and speed < 0):
-            self.speedrechts = min(0, speed - turn)
+       elif (turn > 0 and speed < 0):
+            self.speedrechts = min(0, speed + turn)
             self.speedlinks = speed
-        elif (speed == 0 and turn > 0):
+       elif (speed == 0 and turn != 0):
             self.speedlinks = turn
             self.speedrechts = -turn
-        elif (speed == 0 and turn < 0):
-            self.speedlinks = -turn
-            self.speedrechts = turn
-        elif (turn == 0 and speed != 0):
+       elif (turn == 0 and speed != 0):
             self.speedlinks = speed
             self.speedrechts = speed
-        else:
+       else:
             self.speedlinks = 0
             self.speedrechts = 0
 
-        print("Speedlinks %d" % self.speedlinks)
-        print("Speedrechts %d" % self.speedrechts)
+       print("Speedlinks %d" % self.speedlinks)
+       print("Speedrechts %d" % self.speedrechts)
 
-        self.motors.motorControl.setSpeedL(self, self.speedlinks + self.motoranpassung(x_rotation))
-        self.motors.motorControl.setSpeedR(self, self.speedrechts + self.motoranpassung(x_rotation))
+       self.motors.motorControl.setSpeedL(self, self.speedlinks + self.motoranpassung(x_rotation))
+       self.motors.motorControl.setSpeedR(self, self.speedrechts + self.motoranpassung(x_rotation))
 
        
 #        if(not self.motors.drivingForward and not self.motors.drivingBackward and not self.motors.drivingLeft and not self.motors.drivingRight) :
