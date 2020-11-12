@@ -3,7 +3,7 @@ from time import sleep
 
 
 class camera(object):
-    
+    print("test")
     def __init__(self):
         self.PiCamera = picamera.PiCamera()
         print("Kamera iniziiert")
