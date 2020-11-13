@@ -104,7 +104,7 @@ class motorControl(object):
         setSpeedL(speed)
         print("rechts drehen")
 
-    def forward(speed):
+    def forward(speed: int):
         if(speed > 0):
             drivingForward = True
             drivingBackward = False
@@ -113,7 +113,7 @@ class motorControl(object):
             setSpeed(speed)
             print("Vorwaerts")
 
-    def backward(speed):
+    def backward(speed: int):
         if(speed < 0):
             drivingForward = False
             drivingBackward = True

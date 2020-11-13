@@ -2,7 +2,7 @@ import time
 
 class PID(object):
 
-    def __init__(self, Kp, Ki, Kd):#self am ende, damit man werte übergeben kann?
+    def __init__(self, Kp, Ki, Kd):
         self.Kp=Kp
         self.Ki=Ki
         self.Kd=Kd
