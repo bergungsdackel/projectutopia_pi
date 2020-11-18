@@ -45,10 +45,10 @@ while True:
         #anderer thread für wifi cmds
         if(WifiThread.neueDaten == True):
                 
-            print(WifiThread.targetSpeedFB) #vorwaerts oder rueckwaerts je nach vorzeichen
-            print(WifiThread.rotateStrength) #links oder rechts mit welcher Geschw. je nach Vorzeichen
+            print("TargetSpeedFB: "+str(WifiThread.targetSpeedFB)) #vorwaerts oder rueckwaerts je nach vorzeichen
+            print("RotateStrength: "+str(WifiThread.rotateStrength)) #links oder rechts mit welcher Geschw. je nach Vorzeichen
             WifiThread.neueDaten = False #daten wurden verarbeitet, also kann WifiClass wieder empfangen
-        #time.sleep(5)
+
     except Exception as e:
         print("error:"+str(e))
         GPIO.cleanup()
