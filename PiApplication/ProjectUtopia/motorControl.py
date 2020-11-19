@@ -50,13 +50,16 @@ class motorControl(object):
             speed might be -15...+15
         """
         force = min(15, abs(speed))
-        isForewards = speed > 0
-        if (isForewards):
+        if (speed > 0):
             GPIO.output(self.inBackwardPinL, False)
             GPIO.output(self.inForewardPinL, True)
+        elif (speed < 0):
+            GPIO.output(self.inForewardPinL, False)
+            GPIO.output(self.inBackwardPinL, True)
         else:
             GPIO.output(self.inForewardPinL, False)
-            GPIO.output(self.inBackwardPinL, force > 0)
+            GPIO.output(self.inBackwardPinL, False)
+
         if force > 0:
             self.pwmL.ChangeDutyCycle(10 + 6 * force)
         else:
@@ -67,13 +70,17 @@ class motorControl(object):
             speed might be -15...+15
         """
         force = min(15, abs(speed))
-        isForewards = speed > 0
-        if (isForewards):
+
+        if (speed > 0):
             GPIO.output(self.inBackwardPinR, False)
             GPIO.output(self.inForewardPinR, True)
+        elif (speed < 0):
+            GPIO.output(self.inForewardPinR, False)
+            GPIO.output(self.inBackwardPinR, True)
         else:
             GPIO.output(self.inForewardPinR, False)
-            GPIO.output(self.inBackwardPinR, force > 0)
+            GPIO.output(self.inBackwardPinR, False)
+
         if force > 0:
             self.pwmR.ChangeDutyCycle(10 + 6 * force)
         else:
