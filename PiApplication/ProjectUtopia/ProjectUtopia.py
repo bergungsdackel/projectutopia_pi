@@ -32,16 +32,11 @@ while True:
         #read gyroskop
         #GyroClass.read_gyro()
         #
-        print("0")
         Distanz = EchoClass.Distanz()
-        print(str(Distanz))
         speed = WifiThread.targetSpeedFB
-        print("1")
         turn = WifiThread.rotateStrength
         #PID_CONTROL_CLASS.reglung(GyroClass.gyroskop_x_skaliert, speed, turn)        
-        print("2")
-        PID_CONTROL_CLASS.reglung(2, speed, turn)
-        print("3")
+        PID_CONTROL_CLASS.reglung(0, speed, turn)
         #anderer thread für wifi cmds
         if(WifiThread.neueDaten == True):
                 
