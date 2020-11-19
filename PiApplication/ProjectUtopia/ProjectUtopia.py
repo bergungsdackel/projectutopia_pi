@@ -40,8 +40,8 @@ while True:
         #anderer thread für wifi cmds
         if(WifiThread.neueDaten == True):
                 
-            print("TargetSpeedFB: "+str(WifiThread.targetSpeedFB)) #vorwaerts oder rueckwaerts je nach vorzeichen
-            print("RotateStrength: "+str(WifiThread.rotateStrength)) #links oder rechts mit welcher Geschw. je nach Vorzeichen
+            print("\nTargetSpeedFB: "+str(WifiThread.targetSpeedFB)) #vorwaerts oder rueckwaerts je nach vorzeichen
+            print("\nRotateStrength: "+str(WifiThread.rotateStrength)) #links oder rechts mit welcher Geschw. je nach Vorzeichen
             WifiThread.neueDaten = False #daten wurden verarbeitet, also kann WifiClass wieder empfangen
 
     except Exception as e:

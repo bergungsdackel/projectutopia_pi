@@ -61,14 +61,17 @@ class WifiModule(threading.Thread):
 
                             print("stengthL: " + strengthL + ", directionL: " + directionL + ", strengthR: " + strengthR + ", directionR: " + directionR)
 
-                            if(directionL == "F"):
-                                self.targetSpeedFB = int(strengthL)
-                            elif(directionL == "B"):
-                                self.targetSpeedFB = -(int((strengthL)))
-                            if(directionR == "L"):
-                                self.rotateStrength = int(strengthR) #-10 ist links
-                            elif(directionR == "R"):
-                                self.rotateStrength = -(int((strengthR)))
+                            self.targetSpeedFB = int(strengthL)
+                            self.rotateStrength = int(strengthR)
+
+                            #if(directionL == "F"):
+                            #    self.targetSpeedFB = int(strengthL)
+                            #elif(directionL == "B"):
+                            #    self.targetSpeedFB = int(strengthL)
+                            #if(directionR == "L"):
+                            #    self.rotateStrength = int(strengthR) #-10 ist links
+                            #elif(directionR == "R"):
+                            #    self.rotateStrength = int(strengthR)
 
                             print("\nDurchlaufdauer: " + str(float(float(time.process_time()) - float(start)))) #debug zeitmessung
                             self.neueDaten = True
