@@ -59,7 +59,7 @@ class WifiModule(threading.Thread):
                             lesbarerString = self.data.decode("utf-8")
                             strengthL, directionL, strengthR, directionR = lesbarerString.split("|")
 
-                            #print("stengthL: " + strengthL + ", directionL: " + directionL + ", strengthR: " + strengthR + ", directionR: " + directionR)
+                            print("stengthL: " + strengthL + ", directionL: " + directionL + ", strengthR: " + strengthR + ", directionR: " + directionR)
 
                             if(directionL == "F"):
                                 self.targetSpeedFB = int(strengthL)
@@ -70,7 +70,7 @@ class WifiModule(threading.Thread):
                             elif(directionR == "R"):
                                 self.rotateStrength = -(int((strengthR)))
 
-                            print("Durchlaufdauer: " + str(float(float(time.process_time()) - float(start)))) #debug zeitmessung
+                            print("\nDurchlaufdauer: " + str(float(float(time.process_time()) - float(start)))) #debug zeitmessung
                             self.neueDaten = True
                         else:
                             self.error = True;
