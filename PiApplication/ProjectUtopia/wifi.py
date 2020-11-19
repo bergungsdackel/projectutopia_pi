@@ -38,9 +38,11 @@ class WifiModule(threading.Thread):
 
             if(self.neueDaten == False):
 
+                start = float(time.process_time()) #debug zeitmessung
+
                 self.data, (self.ip, self.port) = self.sock.recvfrom(1024) # buffer size is 1024 bytes
-                print("received message: %s" % self.data)
-                print("received from: {0}:{1}".format(str(self.ip), str(self.port)))
+                #print("received message: %s" % self.data)
+                #print("received from: {0}:{1}".format(str(self.ip), str(self.port)))
 
                 if(self.data != None):
                     length = len(self.data)
@@ -68,6 +70,7 @@ class WifiModule(threading.Thread):
                             elif(directionR == "R"):
                                 self.rotateStrength = -(int((strengthR)))
 
+                            print("Durchlaufdauer: " + float(float(time.process_time()) - float(start))) #debug zeitmessung
                             self.neueDaten = True
                         else:
                             self.error = True;
