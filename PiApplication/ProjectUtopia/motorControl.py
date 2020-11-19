@@ -49,6 +49,7 @@ class motorControl(object):
         """
             speed might be -15...+15
         """
+        print("linksspeed:" % speed)
         force = min(15, abs(speed))
         if (speed > 0):
             GPIO.output(self.inBackwardPinL, False)
@@ -69,6 +70,7 @@ class motorControl(object):
         """
             speed might be -15...+15
         """
+        print("rechtsspeed:" % speed)
         force = min(15, abs(speed))
 
         if (speed > 0):
