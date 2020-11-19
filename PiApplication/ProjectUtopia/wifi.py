@@ -70,7 +70,7 @@ class WifiModule(threading.Thread):
                             elif(directionR == "R"):
                                 self.rotateStrength = -(int((strengthR)))
 
-                            print("Durchlaufdauer: " + float(float(time.process_time()) - float(start))) #debug zeitmessung
+                            print("Durchlaufdauer: " + str(float(float(time.process_time()) - float(start)))) #debug zeitmessung
                             self.neueDaten = True
                         else:
                             self.error = True;
