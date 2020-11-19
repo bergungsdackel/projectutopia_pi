@@ -49,28 +49,19 @@ class motorControl(object):
         """
             speed might be -15...+15
         """
-        print("linksspeed:%d" % speed)
         force = min(15, abs(speed))
         if (speed > 0):
             GPIO.output(self.inBackwardPinL, False)
-            print("inBackwardspinL:False")
             GPIO.output(self.inForewardPinL, True)
-            print("inForewardspinL:True")
         elif (speed < 0):
             GPIO.output(self.inForewardPinL, False)
-            print("inForewardspinL:False")
             GPIO.output(self.inBackwardPinL, True)
-            print("inBackwardspinL:True")
         else:
             GPIO.output(self.inForewardPinL, False)
-            print("inForewardspinL:False")
             GPIO.output(self.inBackwardPinL, False)
-            print("inBackwardspinL:False")
 
         if force > 0:
             self.pwmL.ChangeDutyCycle(10 + 6 * force)
-            print("pwm")
-            print(10+6*force)
         else:
             self.pwmL.ChangeDutyCycle(0)
         
@@ -78,29 +69,20 @@ class motorControl(object):
         """
             speed might be -15...+15
         """
-        print("rechtsspeed:%d" % speed)
         force = min(15, abs(speed))
 
         if (speed > 0):
             GPIO.output(self.inBackwardPinR, False)
-            print("inBackwardspinR:False")
             GPIO.output(self.inForewardPinR, True)
-            print("inForewardspinR:True")
         elif (speed < 0):
             GPIO.output(self.inForewardPinR, False)
-            print("inForewardspinR:False")
             GPIO.output(self.inBackwardPinR, True)
-            print("inBackwardspinR:True")
         else:
             GPIO.output(self.inForewardPinR, False)
-            print("inForewardspinR:False")
             GPIO.output(self.inBackwardPinR, False)
-            print("inBackwardspinR:False")
 
         if force > 0:
             self.pwmR.ChangeDutyCycle(10 + 6 * force)
-            print("pwm")
-            print(10+6*force)
         else:
             self.pwmR.ChangeDutyCycle(0)
 
