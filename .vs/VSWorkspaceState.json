@@ -1,6 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\PiApplication",
+    "\\PiApplication\\ProjectUtopia"
   ],
+  "SelectedNode": "\\PiApplication\\ProjectUtopia",
   "PreviewInSolutionExplorer": false
 }
