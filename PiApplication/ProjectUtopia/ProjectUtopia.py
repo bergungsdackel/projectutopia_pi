@@ -4,6 +4,7 @@ import RPi.GPIO as GPIO
 import time
 import gyro
 import wifi
+import tcpHandler
 from motorControl import motorControl
 import Echo
 import Kamera
@@ -23,7 +24,9 @@ PinEchoEcho = 10
 motorcontrol = motorControl(PinEnMotorLeft, PinEnMotorRight, PinMotorlinksvorwaerts, PinMotorlinksrueckwaerts, PinMotorrechtsvorwaerts, PinMotorrechtsrueckwaerts)
 PID_CONTROL_CLASS = pid_control.pid_control(1,2,3,motorcontrol)
 
-WifiThread = wifi.WifiModule()
+RcvWifiThread = wifi.RcvWifiModule()
+SendWifiThread = wifi.SendWifiModule()
+tcpHandlerClass = tcpHandler.tcpHandler()
 EchoClass = Echo.Echo(PinEchoTrigger, PinEchoEcho)
 #GyroClass = gyro.gyro()
 
@@ -33,19 +36,22 @@ while True:
         #GyroClass.read_gyro()
         #
         Distanz = EchoClass.Distanz()
-        speed = WifiThread.targetSpeedFB
-        turn = WifiThread.rotateStrength
+        speed = RcvWifiThread.targetSpeedFB
+        turn = RcvWifiThread.rotateStrength
         #PID_CONTROL_CLASS.reglung(GyroClass.gyroskop_x_skaliert, speed, turn)        
         PID_CONTROL_CLASS.reglung(0, speed, turn)
         #anderer thread für wifi cmds
-        if(WifiThread.neueDaten == True):
+        if(RcvWifiThread.neueDaten == True):
                 
-            print("\nTargetSpeedFB: "+str(WifiThread.targetSpeedFB)) #vorwaerts oder rueckwaerts je nach vorzeichen
-            print("\nRotateStrength: "+str(WifiThread.rotateStrength)) #links oder rechts mit welcher Geschw. je nach Vorzeichen
-            WifiThread.neueDaten = False #daten wurden verarbeitet, also kann WifiClass wieder empfangen
+            print("\nTargetSpeedFB: "+str(RcvWifiThread.targetSpeedFB)) #vorwaerts oder rueckwaerts je nach vorzeichen
+            print("\nRotateStrength: "+str(RcvWifiThread.rotateStrength)) #links oder rechts mit welcher Geschw. je nach Vorzeichen
+            SendWifiThread.Smartphone_IP = RcvWifiThread.Smartphone_IP #IP setzen
+            RcvWifiThread.neueDaten = False #daten wurden verarbeitet, also kann WifiClass wieder empfangen
 
     except Exception as e:
-        print("error:"+str(e))
+        print("Main-Error: "+str(e))
         GPIO.cleanup()
         break
+    finally:
+        GPIO.cleanup()
         
