@@ -31,17 +31,18 @@ class pid_control(object):
         #self.PID_CLASS.pid(x_rotation)
 
         #geregelterWert = self.PID_CLASS.Ausgang
+
        if (turn < 0 and speed > 0):
-            self.speedlinks = max(0,speed + turn)
+            self.speedlinks = max(0, speed + turn)
             self.speedrechts = speed
        elif (turn > 0 and speed > 0):
-            self.speedrechts = max(0,speed - turn)
+            self.speedrechts = max(0, speed - turn)
             self.speedlinks = speed
        elif (turn < 0 and speed < 0):
-            self.speedlinks = min(0,speed - turn)
+            self.speedlinks = -max(0, abs(speed - turn))
             self.speedrechts = speed
        elif (turn > 0 and speed < 0):
-            self.speedrechts = min(0, speed + turn)
+            self.speedrechts = -max(0, abs(speed + turn))
             self.speedlinks = speed
        elif (speed == 0 and turn != 0):
             self.speedlinks = turn
@@ -53,8 +54,8 @@ class pid_control(object):
             self.speedlinks = 0
             self.speedrechts = 0
 
-       print("Speedlinks %d" % self.speedlinks)
-       print("Speedrechts %d" % self.speedrechts)
+       #print("Speedlinks %d" % self.speedlinks)
+       #print("Speedrechts %d" % self.speedrechts)
        motoranpassung = self.motoranpassung(x_rotation)
        self.motors.setSpeedL(self.speedlinks + motoranpassung)
        self.motors.setSpeedR(self.speedrechts + motoranpassung)

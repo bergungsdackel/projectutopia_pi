@@ -32,21 +32,16 @@ while True:
         #read gyroskop
         #GyroClass.read_gyro()
         #
-        print("0")
         Distanz = EchoClass.Distanz()
-        print(str(Distanz))
         speed = WifiThread.targetSpeedFB
-        print("1")
         turn = WifiThread.rotateStrength
         #PID_CONTROL_CLASS.reglung(GyroClass.gyroskop_x_skaliert, speed, turn)        
-        print("2")
-        PID_CONTROL_CLASS.reglung(2, speed, turn)
-        print("3")
+        PID_CONTROL_CLASS.reglung(0, speed, turn)
         #anderer thread für wifi cmds
         if(WifiThread.neueDaten == True):
                 
-            print("TargetSpeedFB: "+str(WifiThread.targetSpeedFB)) #vorwaerts oder rueckwaerts je nach vorzeichen
-            print("RotateStrength: "+str(WifiThread.rotateStrength)) #links oder rechts mit welcher Geschw. je nach Vorzeichen
+            print("\nTargetSpeedFB: "+str(WifiThread.targetSpeedFB)) #vorwaerts oder rueckwaerts je nach vorzeichen
+            print("\nRotateStrength: "+str(WifiThread.rotateStrength)) #links oder rechts mit welcher Geschw. je nach Vorzeichen
             WifiThread.neueDaten = False #daten wurden verarbeitet, also kann WifiClass wieder empfangen
 
     except Exception as e:

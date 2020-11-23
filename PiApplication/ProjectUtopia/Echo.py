@@ -12,7 +12,7 @@ class Echo(object):
         self.echo = echo
         GPIO.output(trigger,False)
         print("Ultraschall-Messer iniziiert")
-        print("test")
+
 
     def Distanz(self):
         GPIO.output(self.trigger,True)
@@ -26,5 +26,4 @@ class Echo(object):
         stopzeit = time.time()
         Dauer = stopzeit - startzeit
         distanz = (Dauer * 34300) / 2
-        print("Gemessene Entfernung = %.1f cm" % distanz)
         return distanz
