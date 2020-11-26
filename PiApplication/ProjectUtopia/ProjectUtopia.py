@@ -22,8 +22,7 @@ PinEnMotorRight = 38
 PinEchoTrigger = 8
 PinEchoEcho = 10
 motorcontrol = motorControl(PinEnMotorLeft, PinEnMotorRight, PinMotorlinksvorwaerts, PinMotorlinksrueckwaerts, PinMotorrechtsvorwaerts, PinMotorrechtsrueckwaerts)
-PID_CONTROL_CLASS = pid_control.pid_control(0.1,0.1,0.1,motorcontrol)
-
+PID_CONTROL_CLASS = pid_control.pid_control(1,0,0,motorcontrol)
 RcvWifiThread = wifi.RcvWifiModule()
 SendWifiThread = wifi.SendWifiModule()
 tcpHandlerClass = tcpHandler.tcpHandler()
