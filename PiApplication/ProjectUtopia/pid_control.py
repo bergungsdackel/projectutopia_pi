@@ -19,8 +19,12 @@ class pid_control(object):
         print("Kd = {0}".format(self.Kd))
         print("pid_control iniziiert")
 
-    def motoranpassung(self, x_rotation):
-        self.PID_CLASS.pid(x_rotation)
+    def motoranpassung(self, x_rotation, speed):
+        if(speed > 2):
+            Sollwert = 10
+        if(speed < -2):
+            Sollwert = -10
+        self.PID_CLASS.pid(x_rotation, Sollwert)
         geregelterWert = self.PID_CLASS.Ausgang
         return geregelterWert
 
@@ -56,7 +60,7 @@ class pid_control(object):
 
        #print("Speedlinks %d" % self.speedlinks)
        #print("Speedrechts %d" % self.speedrechts)
-       motoranpassung = self.motoranpassung(x_rotation)
+       motoranpassung = self.motoranpassung(x_rotation, speed)
        self.motors.setSpeedL(self.speedlinks + motoranpassung)
        self.motors.setSpeedR(self.speedrechts + motoranpassung)
 
