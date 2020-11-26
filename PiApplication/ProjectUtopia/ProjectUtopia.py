@@ -22,8 +22,8 @@ PinEnMotorRight = 38
 PinEchoTrigger = 8
 PinEchoEcho = 10
 
-sprung = 0
-i=0
+#sprung = 0
+#i=0
 
 motorcontrol = motorControl(PinEnMotorLeft, PinEnMotorRight, PinMotorlinksvorwaerts, PinMotorlinksrueckwaerts, PinMotorrechtsvorwaerts, PinMotorrechtsrueckwaerts)
 PID_CONTROL_CLASS = pid_control.pid_control(1,0.1,0,motorcontrol)
@@ -39,15 +39,15 @@ try:
             #read gyroskop
             GyroClass.read_gyro()
             #
-            if (i == 30):
-                sprung = 90
+            #if (i == 30):
+            #    sprung = 90
 
             Distanz = EchoClass.Distanz()
             speed = RcvWifiThread.targetSpeedFB
             turn = RcvWifiThread.rotateStrength
-            #PID_CONTROL_CLASS.reglung(GyroClass.gyroskop_x_skaliert, speed, turn)        
-            PID_CONTROL_CLASS.reglung(sprung, speed, turn)
-            i = i + 1
+            PID_CONTROL_CLASS.reglung(GyroClass.gyroskop_x_skaliert, speed, turn)        
+            #PID_CONTROL_CLASS.reglung(sprung, speed, turn)
+            #i = i + 1
             #anderer thread für wifi cmds
             if(RcvWifiThread.neueDaten == True):
                 
