@@ -28,13 +28,13 @@ RcvWifiThread = wifi.RcvWifiModule()
 SendWifiThread = wifi.SendWifiModule()
 tcpHandlerClass = tcpHandler.tcpHandler()
 EchoClass = Echo.Echo(PinEchoTrigger, PinEchoEcho)
-#GyroClass = gyro.gyro()
+GyroClass = gyro.gyro()
 
 try:
     while True:
         try:
             #read gyroskop
-            GyroClass.read_gyro()
+
             #
             Distanz = EchoClass.Distanz()
             speed = RcvWifiThread.targetSpeedFB
