@@ -30,28 +30,32 @@ tcpHandlerClass = tcpHandler.tcpHandler()
 EchoClass = Echo.Echo(PinEchoTrigger, PinEchoEcho)
 #GyroClass = gyro.gyro()
 
-while True:
-    try:
-        #read gyroskop
-        #GyroClass.read_gyro()
-        #
-        Distanz = EchoClass.Distanz()
-        speed = RcvWifiThread.targetSpeedFB
-        turn = RcvWifiThread.rotateStrength
-        #PID_CONTROL_CLASS.reglung(GyroClass.gyroskop_x_skaliert, speed, turn)        
-        PID_CONTROL_CLASS.reglung(0, speed, turn)
-        #anderer thread für wifi cmds
-        if(RcvWifiThread.neueDaten == True):
+try:
+    while True:
+        try:
+            #read gyroskop
+            #GyroClass.read_gyro()
+            #
+            Distanz = EchoClass.Distanz()
+            speed = RcvWifiThread.targetSpeedFB
+            turn = RcvWifiThread.rotateStrength
+            #PID_CONTROL_CLASS.reglung(GyroClass.gyroskop_x_skaliert, speed, turn)        
+            PID_CONTROL_CLASS.reglung(0, speed, turn)
+            #anderer thread für wifi cmds
+            if(RcvWifiThread.neueDaten == True):
                 
-            print("\nTargetSpeedFB: "+str(RcvWifiThread.targetSpeedFB)) #vorwaerts oder rueckwaerts je nach vorzeichen
-            print("\nRotateStrength: "+str(RcvWifiThread.rotateStrength)) #links oder rechts mit welcher Geschw. je nach Vorzeichen
-            SendWifiThread.Smartphone_IP = RcvWifiThread.Smartphone_IP #IP setzen
-            RcvWifiThread.neueDaten = False #daten wurden verarbeitet, also kann WifiClass wieder empfangen
+                print("\nTargetSpeedFB: "+str(RcvWifiThread.targetSpeedFB)) #vorwaerts oder rueckwaerts je nach vorzeichen
+                print("\nRotateStrength: "+str(RcvWifiThread.rotateStrength)) #links oder rechts mit welcher Geschw. je nach Vorzeichen
+                SendWifiThread.Smartphone_IP = RcvWifiThread.Smartphone_IP #IP setzen
+                RcvWifiThread.neueDaten = False #daten wurden verarbeitet, also kann WifiClass wieder empfangen
 
-    except Exception as e:
-        print("Main-Error: "+str(e))
-        GPIO.cleanup()
-        break
-    finally:
-        GPIO.cleanup()
+        except Exception as e:
+            print("Main-Error: "+str(e))
+            GPIO.cleanup()
+            break
+except Exception as e:
+    print("Main-Error: "+str(e))
+    GPIO.cleanup()
+finally:
+    GPIO.cleanup()
         
