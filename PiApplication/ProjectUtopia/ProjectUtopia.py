@@ -34,7 +34,7 @@ try:
     while True:
         try:
             #read gyroskop
-
+            GyroClass.read_gyro()
             #
             Distanz = EchoClass.Distanz()
             speed = RcvWifiThread.targetSpeedFB
