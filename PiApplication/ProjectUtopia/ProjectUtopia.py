@@ -40,7 +40,7 @@ try:
             speed = RcvWifiThread.targetSpeedFB
             turn = RcvWifiThread.rotateStrength
             PID_CONTROL_CLASS.reglung(GyroClass.gyroskop_x_skaliert, speed, turn)        
-            PID_CONTROL_CLASS.reglung(0, speed, turn)
+            #PID_CONTROL_CLASS.reglung(0, speed, turn)
             #anderer thread für wifi cmds
             if(RcvWifiThread.neueDaten == True):
                 
