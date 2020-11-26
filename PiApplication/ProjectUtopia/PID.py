@@ -9,7 +9,7 @@ class PID(object):
 
         self.Buffer = 0.0
         self.Eingang_vorher = 0.0
-        self.zeitfüreinendurchlauf = 2.0
+        self.zeitfüreinendurchlauf = 0.01
         self.Ausgang = 0.0
         self.Regeldifferenz = 0.0
         self.Regeldifferenz_vorher = 0.0
