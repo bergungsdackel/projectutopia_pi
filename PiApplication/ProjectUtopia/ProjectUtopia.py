@@ -21,6 +21,9 @@ PinEnMotorLeft = 37
 PinEnMotorRight = 38
 PinEchoTrigger = 8
 PinEchoEcho = 10
+
+oldtime = 0
+
 motorcontrol = motorControl(PinEnMotorLeft, PinEnMotorRight, PinMotorlinksvorwaerts, PinMotorlinksrueckwaerts, PinMotorrechtsvorwaerts, PinMotorrechtsrueckwaerts)
 PID_CONTROL_CLASS = pid_control.pid_control(1,0.1,0,motorcontrol)
 RcvWifiThread = wifi.RcvWifiModule()
@@ -32,9 +35,13 @@ GyroClass = gyro.gyro()
 try:
     while True:
         try:
+
+            print(time.clock() - oldtime)
             #read gyroskop
             GyroClass.read_gyro()
             #
+
+
             Distanz = EchoClass.Distanz()
             speed = RcvWifiThread.targetSpeedFB
             turn = RcvWifiThread.rotateStrength
@@ -47,7 +54,7 @@ try:
                 print("\nRotateStrength: "+str(RcvWifiThread.rotateStrength)) #links oder rechts mit welcher Geschw. je nach Vorzeichen
                 SendWifiThread.Smartphone_IP = RcvWifiThread.Smartphone_IP #IP setzen
                 RcvWifiThread.neueDaten = False #daten wurden verarbeitet, also kann WifiClass wieder empfangen
-
+            oldtime=time.clock()
         except Exception as e:
             print("Main-Error: "+str(e))
             GPIO.cleanup()

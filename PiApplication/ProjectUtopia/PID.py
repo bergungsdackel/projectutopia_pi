@@ -19,8 +19,8 @@ class PID(object):
         
     def pid(self,Eingang):
         self.Regeldifferenz = Eingang - self.Ausgang
-        self.Buffer = self.Regeldifferenz + self.Buffer
-        self.Ausgang = -1 * (self.Kp * self.Regeldifferenz + self.Ki * self.Buffer + self.Kd * ((self.Regeldifferenz - self.Regeldifferenz_vorher) / self.zeitfüreinendurchlauf))
+        self.Buffer = self.Regeldifferenz * self.zeitfüreinendurchlauf + self.Buffer
+        self.Ausgang = self.Kp * self.Regeldifferenz + self.Ki * self.Buffer  + self.Kd * ((self.Regeldifferenz - self.Regeldifferenz_vorher) / self.zeitfüreinendurchlauf)
         self.Regeldifferenz_vorher = self.Regeldifferenz
         print("Ausgang = %f" % self.Ausgang)
 
