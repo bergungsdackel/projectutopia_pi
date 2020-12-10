@@ -19,14 +19,13 @@ class pid_control(object):
         print("Kd = {0}".format(self.Kd))
         print("pid_control iniziiert")
 
-    def motoranpassung(self, x_rotation, speed, turn):
-        Sollwert = speed * 3
+    def motoranpassung(self, x_rotation, sollwert):
         #ich weiß nicht, ob das funktioniert, gegebenenfalls muss auch noch turn miteinbezogen werden
         #Der veränderte Sollwert soll dafür sorgen, das sich die Drohne nach vorne/hinten kippt, wenn man speed verwendet.
         #vielleicht würde es auch reichen, den Speed nur über den Sollwert für den Regler zu steuern, da er dadurch automatisch nach vorne/hinten fährt.
 
         
-        self.PID_CLASS.pid(x_rotation, Sollwert)
+        self.PID_CLASS.pid(x_rotation, sollwert)
         geregelterWert = self.PID_CLASS.Ausgang
         return geregelterWert
 
@@ -37,34 +36,13 @@ class pid_control(object):
         #self.PID_CLASS.pid(x_rotation)
 
         #geregelterWert = self.PID_CLASS.Ausgang
-
-       if (turn < 0 and speed > 0):
-            self.speedlinks = max(0, speed + turn)
-            self.speedrechts = speed
-       elif (turn > 0 and speed > 0):
-            self.speedrechts = max(0, speed - turn)
-            self.speedlinks = speed
-       elif (turn < 0 and speed < 0):
-            self.speedlinks = -max(0, abs(speed - turn))
-            self.speedrechts = speed
-       elif (turn > 0 and speed < 0):
-            self.speedrechts = -max(0, abs(speed + turn))
-            self.speedlinks = speed
-       elif (speed == 0 and turn != 0):
-            self.speedlinks = turn
-            self.speedrechts = -turn
-       elif (turn == 0 and speed != 0):
-            self.speedlinks = speed
-            self.speedrechts = speed
-       else:
-            self.speedlinks = 0
-            self.speedrechts = 0
+       Sollwert = speed * 3
 
        #print("Speedlinks %d" % self.speedlinks)
        #print("Speedrechts %d" % self.speedrechts)
-       motoranpassung = self.motoranpassung(x_rotation, speed, turn)
-       self.motors.setSpeedL(self.speedlinks + motoranpassung)
-       self.motors.setSpeedR(self.speedrechts + motoranpassung)
+       motoranpassung = self.motoranpassung(x_rotation, Sollwert)
+       self.motors.setSpeedL(motoranpassung + turn/2)
+       self.motors.setSpeedR(motoranpassung - turn/2)
 
        
 #        if(not self.motors.drivingForward and not self.motors.drivingBackward and not self.motors.drivingLeft and not self.motors.drivingRight) :
