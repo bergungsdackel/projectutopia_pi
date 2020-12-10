@@ -28,8 +28,8 @@ PinEchoEcho = 10
 motorcontrol = motorControl(PinEnMotorLeft, PinEnMotorRight, PinMotorlinksvorwaerts, PinMotorlinksrueckwaerts, PinMotorrechtsvorwaerts, PinMotorrechtsrueckwaerts)
 PID_CONTROL_CLASS = pid_control.pid_control(1,1,0,motorcontrol)
 RcvWifiThread = wifi.RcvWifiModule()
-SendWifiThread = wifi.SendWifiModule()
-tcpHandlerClass = tcpHandler.tcpHandler()
+#SendWifiThread = wifi.SendWifiModule()
+#tcpHandlerClass = tcpHandler.tcpHandler()
 EchoClass = Echo.Echo(PinEchoTrigger, PinEchoEcho)
 GyroClass = gyro.gyro()
 
@@ -53,7 +53,7 @@ try:
                 
                 print("\nTargetSpeedFB: "+str(RcvWifiThread.targetSpeedFB)) #vorwaerts oder rueckwaerts je nach vorzeichen
                 print("\nRotateStrength: "+str(RcvWifiThread.rotateStrength)) #links oder rechts mit welcher Geschw. je nach Vorzeichen
-                SendWifiThread.Smartphone_IP = RcvWifiThread.Smartphone_IP #IP setzen
+                #SendWifiThread.Smartphone_IP = RcvWifiThread.Smartphone_IP #IP setzen
                 RcvWifiThread.neueDaten = False #daten wurden verarbeitet, also kann WifiClass wieder empfangen
         except Exception as e:
             print("Main-Error: "+str(e))
