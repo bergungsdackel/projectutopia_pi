@@ -49,7 +49,8 @@ class motorControl(object):
         """
             speed might be -15...+15
         """
-        force = min(15, abs(speed))
+        forceL = min(15, abs(speed))
+        print ("forceL %d" % forceL)
         if (speed > 0):
             GPIO.output(self.inBackwardPinL, False)
             GPIO.output(self.inForewardPinL, True)
@@ -60,8 +61,8 @@ class motorControl(object):
             GPIO.output(self.inForewardPinL, False)
             GPIO.output(self.inBackwardPinL, False)
 
-        if force > 0:
-            self.pwmL.ChangeDutyCycle(10 + 6 * force)
+        if forceL > 0:
+            self.pwmL.ChangeDutyCycle(10 + 6 * forceL)
         else:
             self.pwmL.ChangeDutyCycle(0)
         
@@ -69,7 +70,9 @@ class motorControl(object):
         """
             speed might be -15...+15
         """
-        force = min(15, abs(speed))
+        forceR = min(15, abs(speed))
+        print ("forceR %d" % forceR)
+
 
         if (speed > 0):
             GPIO.output(self.inBackwardPinR, False)
@@ -81,8 +84,8 @@ class motorControl(object):
             GPIO.output(self.inForewardPinR, False)
             GPIO.output(self.inBackwardPinR, False)
 
-        if force > 0:
-            self.pwmR.ChangeDutyCycle(10 + 6 * force)
+        if forceR > 0:
+            self.pwmR.ChangeDutyCycle(10 + 6 * forceR)
         else:
             self.pwmR.ChangeDutyCycle(0)
 
