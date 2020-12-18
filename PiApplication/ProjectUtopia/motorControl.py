@@ -16,8 +16,9 @@ class motorControl(object):
     drivingRight = False
 
     def __init__(self, enPinL: int,enPinR: int, inForewardPinL: int, inBackwardPinL: int,inForewardPinR: int, inBackwardPinR: int):
-        GPIO.setup(inForewardPinL, GPIO.OUT)
+        
         self.inForewardPinL = inForewardPinL
+        GPIO.setup(inForewardPinL, GPIO.OUT)
         GPIO.output(inForewardPinL, False)
  
         self.inBackwardPinL = inBackwardPinL
@@ -26,8 +27,8 @@ class motorControl(object):
  
         GPIO.setup(enPinL, GPIO.OUT)
 
-        GPIO.setup(inForewardPinR, GPIO.OUT)
         self.inForewardPinR = inForewardPinR
+        GPIO.setup(inForewardPinR, GPIO.OUT)
         GPIO.output(inForewardPinL, False)
  
         self.inBackwardPinR = inBackwardPinR
