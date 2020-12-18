@@ -60,12 +60,17 @@ class pid_control(object):
             self.speedlinks = 0
             self.speedrechts = 0
 
-       print("Speedlinks %d" % self.speedlinks)
-       print("Speedrechts %d" % self.speedrechts)
+       
        #motoranpassung = self.motoranpassung(x_rotation, speed, turn)
        motoranpassung = 0
-       self.motors.setSpeedL(self.speedlinks + motoranpassung)
-       self.motors.setSpeedR(self.speedrechts + motoranpassung)
+       print("Speedlinks %d" % (self.speedlinks + motoranpassung))
+       print("Speedrechts %d" % (self.speedrechts + motoranpassung))
+
+       self.motors.setSpeedL(10)
+       self.motors.setSpeedR(10)
+
+       #self.motors.setSpeedL(self.speedlinks + motoranpassung)
+       #self.motors.setSpeedR(self.speedrechts + motoranpassung)
 
        
 #        if(not self.motors.drivingForward and not self.motors.drivingBackward and not self.motors.drivingLeft and not self.motors.drivingRight) :
