@@ -61,8 +61,8 @@ class pid_control(object):
             self.speedrechts = 0
 
        
-       #motoranpassung = self.motoranpassung(x_rotation, speed, turn)
-       motoranpassung = 0
+       motoranpassung = self.motoranpassung(x_rotation, speed, turn)
+       #motoranpassung = 0
        print("Speedlinks %d" % (self.speedlinks + motoranpassung))
        print("Speedrechts %d" % (self.speedrechts + motoranpassung))
 
