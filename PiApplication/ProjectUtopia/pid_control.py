@@ -37,7 +37,7 @@ class pid_control(object):
         #self.PID_CLASS.pid(x_rotation)
 
         #geregelterWert = self.PID_CLASS.Ausgang
-
+       print ("speed: %d" % speed)
        if (turn < 0 and speed > 0):
             self.speedlinks = max(0, speed + turn)
             self.speedrechts = speed
