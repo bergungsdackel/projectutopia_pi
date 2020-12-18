@@ -33,7 +33,6 @@
     <Compile Include="PID.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="pid_control2.py" />
     <Compile Include="pid_control.py">
       <SubType>Code</SubType>
     </Compile>
