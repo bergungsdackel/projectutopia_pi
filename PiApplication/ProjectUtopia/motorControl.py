@@ -89,9 +89,9 @@ class motorControl(object):
         else:
             self.pwmR.ChangeDutyCycle(0)
 
-    def setSpeed(speed: int):
-        setSpeedL(speed)
-        setSpeedR(speed)
+    def setSpeed(self,speed: int):
+        self.setSpeedL(speed)
+        self.setSpeedR(speed)
         print("Geschwindigkeit auf %f" % speed)
 
 
