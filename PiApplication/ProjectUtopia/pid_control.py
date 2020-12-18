@@ -37,7 +37,7 @@ class pid_control(object):
         #self.PID_CLASS.pid(x_rotation)
 
         #geregelterWert = self.PID_CLASS.Ausgang
-
+       print ("speed: %d" % speed)
        if (turn < 0 and speed > 0):
             self.speedlinks = max(0, speed + turn)
             self.speedrechts = speed
@@ -60,8 +60,8 @@ class pid_control(object):
             self.speedlinks = 0
             self.speedrechts = 0
 
-       #print("Speedlinks %d" % self.speedlinks)
-       #print("Speedrechts %d" % self.speedrechts)
+       print("Speedlinks %d" % self.speedlinks)
+       print("Speedrechts %d" % self.speedrechts)
        motoranpassung = self.motoranpassung(x_rotation, speed, turn)
 
        self.motors.setSpeedL(self.speedlinks + motoranpassung)
