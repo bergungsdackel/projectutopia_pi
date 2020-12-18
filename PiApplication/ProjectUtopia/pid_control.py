@@ -20,7 +20,7 @@ class pid_control(object):
         print("pid_control iniziiert")
 
     def motoranpassung(self, x_rotation, speed, turn):
-        #Sollwert = speed * 3
+        Sollwert = speed * 2
         #ich weiß nicht, ob das funktioniert, gegebenenfalls muss auch noch turn miteinbezogen werden
         #Der veränderte Sollwert soll dafür sorgen, das sich die Drohne nach vorne/hinten kippt, wenn man speed verwendet.
         #vielleicht würde es auch reichen, den Speed nur über den Sollwert für den Regler zu steuern, da er dadurch automatisch nach vorne/hinten fährt.
@@ -61,8 +61,8 @@ class pid_control(object):
             self.speedrechts = 0
 
        
-       #motoranpassung = self.motoranpassung(x_rotation, speed, turn)
-       motoranpassung = 0
+       motoranpassung = self.motoranpassung(x_rotation, speed, turn)
+       #motoranpassung = 0
        print("Speedlinks %d" % (self.speedlinks + motoranpassung))
        print("Speedrechts %d" % (self.speedrechts + motoranpassung))
 
