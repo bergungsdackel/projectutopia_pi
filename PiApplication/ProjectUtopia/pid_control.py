@@ -66,9 +66,8 @@ class pid_control(object):
        print("Speedlinks %d" % (self.speedlinks + motoranpassung))
        print("Speedrechts %d" % (self.speedrechts + motoranpassung))
 
-       #self.motors.setSpeedL(10)
-       #self.motors.setSpeedR(10)
-       self.motors.setSpeed(10)
+       self.motors.setSpeedL(-10)
+       self.motors.setSpeedR(10)
 
        #self.motors.setSpeedL(self.speedlinks + motoranpassung)
        #self.motors.setSpeedR(self.speedrechts + motoranpassung)
