@@ -64,7 +64,7 @@ class RcvWifiModule(threading.Thread):
                         elif(self.data.decode("utf-8").count("|") == 3):
 
                             lesbarerString = self.data.decode("utf-8")
-                            strengthL, directionL, strengthR, directionR, Kp, Ki, Kd = lesbarerString.split("|")
+                            strengthL, strengthR, Kp, Ki, Kd = lesbarerString.split("|")
 
                             #print("stengthL: " + strengthL + ", directionL: " + directionL + ", strengthR: " + strengthR + ", directionR: " + directionR)
 
