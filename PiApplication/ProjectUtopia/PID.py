@@ -2,7 +2,7 @@ import time
 
 class PID(object):
 
-    def __init__(self, Kp:float, Ki:float, Kd:float):
+    def __init__(self):
         self.Kp=Kp
         self.Ki=Ki
         self.Kd=Kd
@@ -17,7 +17,7 @@ class PID(object):
 
         print("PID iniziiert")
         
-    def pid(self, Eingang, Sollwert):
+    def pid(self, Eingang, Sollwert, Kp:float, Ki:float, Kd:float):
         self.Regeldifferenz = Sollwert - self.Ausgang
         self.Buffer = self.Regeldifferenz * self.zeitfüreinendurchlauf + self.Buffer
         self.Ausgang = Eingang + self.Ausgang + self.Kp * self.Regeldifferenz + self.Ki * self.Buffer  + self.Kd * ((self.Regeldifferenz - self.Regeldifferenz_vorher) / self.zeitfüreinendurchlauf)
