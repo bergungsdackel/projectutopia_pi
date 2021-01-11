@@ -21,7 +21,9 @@ PinEnMotorLeft = 37
 PinEnMotorRight = 38
 PinEchoTrigger = 8
 PinEchoEcho = 10
-
+Kp = 0
+Ki = 0
+Kd = 0
 #sprung = 0
 #i=0
 
@@ -45,7 +47,10 @@ try:
             Distanz = EchoClass.Distanz()
             speed = RcvWifiThread.targetSpeedFB
             turn = RcvWifiThread.rotateStrength
-            PID_CONTROL_CLASS.reglung(GyroClass.x_rotation, speed, turn)        
+            Kp = RcvWifiThread.Kp
+            Ki = RcvWifiThread.Ki
+            Kd = RcvWifiThread.Kd
+            PID_CONTROL_CLASS.reglung(GyroClass.x_rotation, speed, turn, Kp, Ki, Kd)        
             #PID_CONTROL_CLASS.reglung(sprung, speed, turn)
             #i = i + 1
             #anderer thread für wifi cmds
