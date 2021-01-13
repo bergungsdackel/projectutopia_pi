@@ -32,12 +32,13 @@ class pid_control(object):
 
     def selfrighting (self, x_rotation, Gyrokompensation: float):
         i=10000
+        self.PID_CLASS.regelerror = True
         while (i != 0):
             self.motors.setSpeed(-15)
             i=i-1
         while (abs(x_rotation-Gyrokompensation) > 25):
             self.motors.setSpeed(15)
-        if (abs(x_rotation-Gyrokompensation) < 30 
+        if (abs(x_rotation-Gyrokompensation) < 30 ):
             self.PID_CLASS.regelerror = False
             
 
@@ -46,7 +47,7 @@ class pid_control(object):
         #self.PID_CLASS.pid(x_rotation)
 
         #geregelterWert = self.PID_CLASS.Ausgang
-        if(!self.PID_CLASS.regelerror):
+        if(self.PID_CLASS.regelerror == False):
            print ("speed: %d" % speed)
            if (turn < 0 and speed > 0):
                 self.speedlinks = max(0, speed + turn)
