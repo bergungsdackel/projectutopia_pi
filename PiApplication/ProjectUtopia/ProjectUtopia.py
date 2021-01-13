@@ -24,6 +24,7 @@ PinEchoEcho = 10
 Kp = 0
 Ki = 0
 Kd = 0
+Gyrokompenation = 0
 #sprung = 0
 #i=0
 
@@ -50,7 +51,7 @@ try:
             Kp = RcvWifiThread.Kp
             Ki = RcvWifiThread.Ki
             Kd = RcvWifiThread.Kd
-            PID_CONTROL_CLASS.reglung(GyroClass.x_rotation, speed, turn, Kp, Ki, Kd)        
+            PID_CONTROL_CLASS.reglung(GyroClass.x_rotation, speed, turn, Gyrokompensation, Kp, Ki, Kd)        
             #PID_CONTROL_CLASS.reglung(sprung, speed, turn)
             #i = i + 1
             #anderer thread für wifi cmds
