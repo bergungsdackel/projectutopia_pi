@@ -20,9 +20,9 @@ class selfdriving(object):
     else:
       self.Objectdetectet = False
       
-  def drive(self):
+  def drive(self, Kp, Ki, Kd):
     self.detect()
     if(self.Objectdetectet==False):
-      PID_CONTROL_CLASS.reglung(gyro.x_rotation, 5, 0, Gyrokompensation, self.Kp, self.Ki, self.Kd)
+      PID_CONTROL_CLASS.reglung(gyro.x_rotation, 5, 0, Gyrokompensation, Kp, Ki, Kd)
     if(self.Objectdetectet==True):
-      PID_CONTROL_CLASS.reglung(gyro.x_rotation, 1, 1, Gyrokompensation, self.Kp, self.Ki, self.Kd)
+      PID_CONTROL_CLASS.reglung(gyro.x_rotation, 1, 1, Gyrokompensation, Kp, Ki, Kd)
