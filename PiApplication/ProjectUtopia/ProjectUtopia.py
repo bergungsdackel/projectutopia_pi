@@ -41,33 +41,49 @@ SelfdrivingClass = Selfdriving.selfdriving(motorcontrol, GyroClass, Gyrokompensa
 try:
     while True:
         try:
-            Kp = RcvWifiThread.Kp
-            Ki = RcvWifiThread.Ki
-            Kd = RcvWifiThread.Kd
-            if(True):
-                #read gyroskop
-                GyroClass.read_gyro()
-                #
-                #if (i == 30):
-                #    sprung = 90
+            if(Kp == 0 and Ki == 0 and Kd == 0):
+                if(RcvWifiThread.KonstantenReceived == True):
+                    print("nKp: "+str(RcvWifiThread.Kp))
+                    print("nKi: "+str(RcvWifiThread.Ki))
+                    print("nKd: "+str(RcvWifiThread.Kd))
+                    Kp = RcvWifiThread.Kp
+                    Ki = RcvWifiThread.Ki
+                    Kd = RcvWifiThread.Kd            
+                  
 
-                Distanz = EchoClass.Distanz()
-                speed = RcvWifiThread.targetSpeedFB
-                turn = RcvWifiThread.rotateStrength
-                PID_CONTROL_CLASS.reglung(GyroClass.x_rotation, speed, turn, Gyrokompensation, Kp, Ki, Kd)        
-                #PID_CONTROL_CLASS.reglung(sprung, speed, turn)
-                #i = i + 1
-                #anderer thread für wifi cmds
+            if(RcvWifiThread.KonstantenReceived == True):
 
-            else:
-                selfdrivingClass.drive(Kp, Ki, Kd)
+                if(RcvWifiThread.neueDaten == True):
+                    print("\nTargetSpeedFB: "+str(RcvWifiThread.targetSpeedFB)) #vorwaerts oder rueckwaerts je nach vorzeichen
+                    print("\nRotateStrength: "+str(RcvWifiThread.rotateStrength)) #links oder rechts mit welcher Geschw. je nach Vorzeichen
+                    #SendWifiThread.Smartphone_IP = RcvWifiThread.Smartphone_IP #IP setzen
+                    RcvWifiThread.neueDaten = False #daten wurden verarbeitet, also kann WifiClass wieder empfangen
 
-            if(RcvWifiThread.neueDaten == True):
 
-                print("\nTargetSpeedFB: "+str(RcvWifiThread.targetSpeedFB)) #vorwaerts oder rueckwaerts je nach vorzeichen
-                print("\nRotateStrength: "+str(RcvWifiThread.rotateStrength)) #links oder rechts mit welcher Geschw. je nach Vorzeichen
-                #SendWifiThread.Smartphone_IP = RcvWifiThread.Smartphone_IP #IP setzen
-                RcvWifiThread.neueDaten = False #daten wurden verarbeitet, also kann WifiClass wieder empfangen
+                if(True):
+                    #read gyroskop
+                    GyroClass.read_gyro()
+                    #
+                    #if (i == 30):
+                    #    sprung = 90
+
+                    Distanz = EchoClass.Distanz()
+                    print("Debug Distanz: " + str(Distanz)) #Debug
+
+                    speed = RcvWifiThread.targetSpeedFB
+                    turn = RcvWifiThread.rotateStrength
+                    PID_CONTROL_CLASS.reglung(GyroClass.x_rotation, speed, turn, Gyrokompensation, Kp, Ki, Kd)        
+                    #PID_CONTROL_CLASS.reglung(sprung, speed, turn)
+                    #i = i + 1
+                    #anderer thread für wifi cmds
+
+                else:
+                    selfdrivingClass.drive(Kp, Ki, Kd)
+
+
+
+
+
         except Exception as e:
             print("Main-Error: "+str(e))
             GPIO.cleanup()
