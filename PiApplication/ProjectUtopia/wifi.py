@@ -21,6 +21,7 @@ class RcvWifiModule(threading.Thread):
         self.Ki = 0
         self.Kd = 0
         self.neueDaten = False
+        self.KonstantenReceived = False
         self.error = False
 
         self.sock = socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
@@ -56,23 +57,28 @@ class RcvWifiModule(threading.Thread):
 
                     try:
 
-                        if(length == 4 or length == 6):
+                        if(self.data.decode("utf-8").count("|") == 3):
                             print("\nVerbindungsanfrage: Schicke {0} Bytes zurück an {1}:{2}".format(length, self.ip, self.PING_PORT))
-                            sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-                            sock.sendto(self.data, (self.ip, self.PING_PORT))
-                            self.neueDaten = False
-                        elif(self.data.decode("utf-8").count("|") == 3):
 
                             lesbarerString = self.data.decode("utf-8")
-                            strengthL, strengthR, Kp, Ki, Kd = lesbarerString.split("|")
+                            randomBytes, Kp, Ki, Kd = lesbarerString.split("|")
+                            self.Kp = int(Kp)
+                            self.Ki = int(Ki)
+                            self.Kd = int(Kd)
+
+                            sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+                            sock.sendto(self.data, (self.ip, self.PING_PORT))
+                            self.KonstantenReceived = True
+                            self.neueDaten = False
+                        elif(self.data.decode("utf-8").count("|") == 1):
+
+                            lesbarerString = self.data.decode("utf-8")
+                            strengthL, strengthR = lesbarerString.split("|")
 
                             #print("stengthL: " + strengthL + ", directionL: " + directionL + ", strengthR: " + strengthR + ", directionR: " + directionR)
 
                             self.targetSpeedFB = int(strengthL)
-                            self.rotateStrength = int(strengthR)
-                            self.Kp = int(Kp)
-                            self.Ki = int(Ki)
-                            self.Kd = int(Kd)
+                            self.rotateStrength = int(strengthR)                       
 
                             #print("\nDurchlaufdauer: " + str(float(float(time.process_time()) - float(start)))) #debug zeitmessung
                             
