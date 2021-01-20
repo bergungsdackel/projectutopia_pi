@@ -8,6 +8,7 @@ import tcpHandler
 from motorControl import motorControl
 import Echo
 import Kamera
+import Selfdriving
 
 #for x in range(0,10):
 
@@ -21,7 +22,10 @@ PinEnMotorLeft = 37
 PinEnMotorRight = 38
 PinEchoTrigger = 8
 PinEchoEcho = 10
-
+Kp = 0
+Ki = 0
+Kd = 0
+Gyrokompenation = 0
 #sprung = 0
 #i=0
 
@@ -32,25 +36,34 @@ RcvWifiThread = wifi.RcvWifiModule()
 #tcpHandlerClass = tcpHandler.tcpHandler()
 EchoClass = Echo.Echo(PinEchoTrigger, PinEchoEcho)
 GyroClass = gyro.gyro()
+SelfdrivingClass = Selfdriving.selfdriving(motorcontrol, GyroClass, Gyrokompensation, Kp, Ki, Kd)
 
 try:
     while True:
         try:
-            #read gyroskop
-            GyroClass.read_gyro()
-            #
-            #if (i == 30):
-            #    sprung = 90
+            Kp = RcvWifiThread.Kp
+            Ki = RcvWifiThread.Ki
+            Kd = RcvWifiThread.Kd
+            if(True):
+                #read gyroskop
+                GyroClass.read_gyro()
+                #
+                #if (i == 30):
+                #    sprung = 90
 
-            Distanz = EchoClass.Distanz()
-            speed = RcvWifiThread.targetSpeedFB
-            turn = RcvWifiThread.rotateStrength
-            PID_CONTROL_CLASS.reglung(GyroClass.x_rotation, speed, turn)        
-            #PID_CONTROL_CLASS.reglung(sprung, speed, turn)
-            #i = i + 1
-            #anderer thread für wifi cmds
+                Distanz = EchoClass.Distanz()
+                speed = RcvWifiThread.targetSpeedFB
+                turn = RcvWifiThread.rotateStrength
+                PID_CONTROL_CLASS.reglung(GyroClass.x_rotation, speed, turn, Gyrokompensation, Kp, Ki, Kd)        
+                #PID_CONTROL_CLASS.reglung(sprung, speed, turn)
+                #i = i + 1
+                #anderer thread für wifi cmds
+
+            else:
+                selfdrivingClass.drive(Kp, Ki, Kd)
+
             if(RcvWifiThread.neueDaten == True):
-                
+
                 print("\nTargetSpeedFB: "+str(RcvWifiThread.targetSpeedFB)) #vorwaerts oder rueckwaerts je nach vorzeichen
                 print("\nRotateStrength: "+str(RcvWifiThread.rotateStrength)) #links oder rechts mit welcher Geschw. je nach Vorzeichen
                 #SendWifiThread.Smartphone_IP = RcvWifiThread.Smartphone_IP #IP setzen

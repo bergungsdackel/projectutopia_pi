@@ -21,6 +21,7 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="barokompass.py" />
     <Compile Include="Echo.py">
       <SubType>Code</SubType>
     </Compile>
@@ -40,6 +41,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ProjectUtopia.py" />
+    <Compile Include="Selfdriving.py" />
     <Compile Include="tcpHandler.py">
       <SubType>Code</SubType>
     </Compile>

@@ -17,6 +17,9 @@ class RcvWifiModule(threading.Thread):
         self.data = None
         self.targetSpeedFB = 0
         self.rotateStrength = 0
+        self.Kp = 0
+        self.Ki = 0
+        self.Kd = 0
         self.neueDaten = False
         self.error = False
 
@@ -61,12 +64,15 @@ class RcvWifiModule(threading.Thread):
                         elif(self.data.decode("utf-8").count("|") == 3):
 
                             lesbarerString = self.data.decode("utf-8")
-                            strengthL, directionL, strengthR, directionR = lesbarerString.split("|")
+                            strengthL, strengthR, Kp, Ki, Kd = lesbarerString.split("|")
 
                             #print("stengthL: " + strengthL + ", directionL: " + directionL + ", strengthR: " + strengthR + ", directionR: " + directionR)
 
                             self.targetSpeedFB = int(strengthL)
                             self.rotateStrength = int(strengthR)
+                            self.Kp = int(Kp)
+                            self.Ki = int(Ki)
+                            self.Kd = int(Kd)
 
                             #print("\nDurchlaufdauer: " + str(float(float(time.process_time()) - float(start)))) #debug zeitmessung
                             
