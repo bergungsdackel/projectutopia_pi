@@ -29,9 +29,9 @@ class PID(object):
         self.Ausgang = kompEingang + self.Ausgang + self.Kp * self.Regeldifferenz + self.Ki * self.Buffer  + self.Kd * ((self.Regeldifferenz - self.Regeldifferenz_vorher) / self.zeitfüreinendurchlauf)
         self.Regeldifferenz_vorher = self.Regeldifferenz
         print("Ausgang = %f" % self.Ausgang)
-        if(Buffer > self.maxBuffer):
-            Buffer = self.maxBuffer
-        if(Buffer < -self.maxBuffer):
-            Buffer = -self.maxBuffer
+        if(self.Buffer > self.maxBuffer):
+            self.Buffer = self.maxBuffer
+        if(self.Buffer < -self.maxBuffer):
+            self.Buffer = -self.maxBuffer
         if(abs(self.Ausgang) > abs(self.maxAusgang)):
             self.regelerror = True
