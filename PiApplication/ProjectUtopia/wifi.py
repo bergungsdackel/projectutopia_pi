@@ -49,9 +49,6 @@ class RcvWifiModule(threading.Thread):
                 self.data, (self.ip, self.port) = self.sock.recvfrom(1024) # buffer size is 1024 bytes
                 self.Smartphone_IP = self.ip #Smartphone IP festlegen
 
-                print("received message: %s" % self.data)
-                print("received from: {0}:{1}".format(str(self.ip), str(self.port)))
-
                 if(self.data != None):
                     length = len(self.data)
 
@@ -72,15 +69,13 @@ class RcvWifiModule(threading.Thread):
                             self.neueDaten = False
                         elif(self.data.decode("utf-8").count("|") == 1):
 
-                            print("Dekodiere Daten von Smartphone")
-
                             lesbarerString = self.data.decode("utf-8")
                             strengthL, strengthR = lesbarerString.split("|")
 
-                            #print("stengthL: " + strengthL + ", directionL: " + directionL + ", strengthR: " + strengthR + ", directionR: " + directionR)
+                            print("stengthL: " + strengthL + ", strengthR: " + strengthR)
 
                             self.targetSpeedFB = int(strengthL)
-                            self.rotateStrength = int(strengthR)                       
+                            self.rotateStrength = int(strengthR)                        
 
                             #print("\nDurchlaufdauer: " + str(float(float(time.process_time()) - float(start)))) #debug zeitmessung
                             
