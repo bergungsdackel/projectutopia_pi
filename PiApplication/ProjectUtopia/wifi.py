@@ -75,7 +75,7 @@ class RcvWifiModule(threading.Thread):
                             print("stengthL: " + strengthL + ", strengthR: " + strengthR)
 
                             self.targetSpeedFB = int(strengthL)
-                            self.rotateStrength = int(strengthR)                       
+                            self.rotateStrength = int(strengthR)                        
 
                             #print("\nDurchlaufdauer: " + str(float(float(time.process_time()) - float(start)))) #debug zeitmessung
                             
