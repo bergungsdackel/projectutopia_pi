@@ -81,7 +81,7 @@ class RcvWifiModule(threading.Thread):
                             
                             self.neueDaten = True
                         else:
-                            self.error = True;
+                            self.error = True
                     except Exception as e:
                         print("\nWifi Error: "+ str(e))
              
