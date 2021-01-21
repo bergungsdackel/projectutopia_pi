@@ -30,7 +30,7 @@ class pid_control(object):
         geregelterWert = self.PID_CLASS.Ausgang
         return geregelterWert
 
-    def selfrighting (self, x_rotation, Gyrokompensation: float):
+    def selfrighting(self, x_rotation, Gyrokompensation: float):
         i=10000
         self.PID_CLASS.regelerror = True
         while (i != 0):
@@ -42,7 +42,7 @@ class pid_control(object):
             self.PID_CLASS.regelerror = False
             
 
-    def reglung (self, x_rotation, speed: int, turn: int, Gyrokompensation: float, Kp: float, Ki: float, Kd: float) :
+    def reglung(self, x_rotation, speed: int, turn: int, Gyrokompensation: float, Kp: float, Ki: float, Kd: float):
 
         #self.PID_CLASS.pid(x_rotation)
 
@@ -72,7 +72,7 @@ class pid_control(object):
                 self.speedrechts = 0
 
 
-           motoranpassung = self.motoranpassung(x_rotation, speed, turn, Gyrokompensation,Kp, Ki, Kd)
+           motoranpassung = self.motoranpassung(x_rotation, speed, turn, Gyrokompensation, Kp, Ki, Kd)
            #motoranpassung = 0
            print("Speedlinks %d" % (self.speedlinks + motoranpassung))
            print("Speedrechts %d" % (self.speedrechts + motoranpassung))
@@ -81,7 +81,7 @@ class pid_control(object):
            self.motors.setSpeedR(self.speedrechts + motoranpassung)
             
         else:
-           selfrighting(x_rotation, Gyrokompensation)
+           self.selfrighting(x_rotation, Gyrokompensation)
 
 
     #        if(not self.motors.drivingForward and not self.motors.drivingBackward and not self.motors.drivingLeft and not self.motors.drivingRight) :
