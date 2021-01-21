@@ -25,7 +25,7 @@ PinEchoEcho = 10
 Kp = 0
 Ki = 0
 Kd = 0
-Gyrokompenation = 0
+Gyrokompensation = 0
 #sprung = 0
 #i=0
 
