@@ -62,9 +62,9 @@ class RcvWifiModule(threading.Thread):
 
                             lesbarerString = self.data.decode("utf-8")
                             randomBytes, Kp, Ki, Kd = lesbarerString.split("|")
-                            self.Kp = int(Kp)
-                            self.Ki = int(Ki)
-                            self.Kd = int(Kd)
+                            self.Kp = float(Kp)
+                            self.Ki = float(Ki)
+                            self.Kd = float(Kd)
 
                             sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
                             sock.sendto(self.data, (self.ip, self.PING_PORT))
