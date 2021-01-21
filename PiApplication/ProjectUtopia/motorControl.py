@@ -51,7 +51,7 @@ class motorControl(object):
             speed might be -15...+15
         """
         forceL = min(15, abs(speed))
-        print ("forceL %d" % forceL)
+        #print ("forceL %d" % forceL)
         if (speed > 0):
             GPIO.output(self.inBackwardPinL, False)
             GPIO.output(self.inForewardPinL, True)
@@ -72,7 +72,7 @@ class motorControl(object):
             speed might be -15...+15
         """
         forceR = min(15, abs(speed))
-        print ("forceR %d" % forceR)
+        #print ("forceR %d" % forceR)
 
 
         if (speed > 0):
@@ -93,7 +93,7 @@ class motorControl(object):
     def setSpeed(self,speed: int):
         self.setSpeedL(speed)
         self.setSpeedR(speed)
-        print("Geschwindigkeit auf %f" % speed)
+        #print("Geschwindigkeit auf %f" % speed)
 
 
     def turnLeft(speed: int):
