@@ -10,7 +10,7 @@ class pid_control(object):
         self.Kp     =    Kp
         self.Ki     =    Ki
         self.Kd     =    Kd
-        self.PID_CLASS = PID.PID()
+        self.PID_CLASS = PID.PID(self.Kp, self.Ki, self.Kd)
         self.motors      =   motors
         self.speedlinks = 0
         self.speedrechts = 0

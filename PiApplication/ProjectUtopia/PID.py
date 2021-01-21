@@ -2,10 +2,10 @@ import time
 
 class PID(object):
 
-    def __init__(self):
-        self.Kp=Kp
-        self.Ki=Ki
-        self.Kd=Kd
+    def __init__(self, Kp:float, Ki:float, Kd:float):
+        self.Kp = Kp
+        self.Ki = Ki
+        self.Kd = Kd
 
         self.Buffer = 0.0
         self.Eingang_vorher = 0.0
@@ -20,6 +20,9 @@ class PID(object):
         print("PID iniziiert")
         
     def pid(self, Eingang, Sollwert, Gyrokompensation:float, Kp:float, Ki:float, Kd:float):
+        self.Kp = Kp
+        self.Ki = Ki
+        self.Kd = Kd
         kompEingang = Eingang-Gyrokompensation
         self.Regeldifferenz = Sollwert - self.Ausgang
         self.Buffer = self.Regeldifferenz * self.zeitfüreinendurchlauf + self.Buffer
