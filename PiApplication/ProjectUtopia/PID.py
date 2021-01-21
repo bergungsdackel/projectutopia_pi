@@ -33,6 +33,9 @@ class PID(object):
             self.Buffer = self.maxBuffer
         if(self.Buffer < -self.maxBuffer):
             self.Buffer = -self.maxBuffer
-        if(abs(self.Ausgang) > abs(self.maxAusgang)):
+        if(self.Ausgang > self.maxAusgang):
             self.Ausgang = self.maxAusgang
+            self.regelerror = True
+        if(self.Ausgang < -self.maxAusgang):
+            self.Ausgang = -self.maxAusgang
             self.regelerror = True
