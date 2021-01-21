@@ -5,7 +5,7 @@ import motorControl
 
 class selfdriving(object):
   
-  def __init__(self, motors: motorcontrol, gyro: gyro, Gyrokompensation, Kp:float, Ki:float, Kd:float,):
+  def __init__(self, motors: motorControl, gyro: gyro, Gyrokompensation, Kp:float, Ki:float, Kd:float,):
     self.Echo = Echo.Echo()
     self.motors = motors
     self.PID_CONTROL_CLASS = pid_control.pid_control(Kp,Ki,Kd,motors)
