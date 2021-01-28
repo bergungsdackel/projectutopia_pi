@@ -31,8 +31,6 @@ try:
     #SendWifiThread = wifi.SendWifiModule()
     #tcpHandlerClass = tcpHandler.tcpHandler()
 
-    time.sleep(3)
-
     motorcontrol = motorControl(PinEnMotorLeft, PinEnMotorRight, PinMotorlinksvorwaerts, PinMotorlinksrueckwaerts, PinMotorrechtsvorwaerts, PinMotorrechtsrueckwaerts)
     EchoClass = Echo.Echo(PinEchoTrigger, PinEchoEcho)
     GyroClass = gyro.gyro()
