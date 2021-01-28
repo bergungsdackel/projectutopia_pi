@@ -38,12 +38,7 @@ class RcvWifiModule(threading.Thread):
         #neueDaten = False
 
 
-        ip = subprocess.check_output(['hostname', '-I'])
-        if len(ip) >= 7:
-            ip4string = ip[:ip.index(" ")]
-        else:
-            ip4string = "-"
-        print("\nEigene IP: " + ip4string)
+        print("\nEigene IP: " + str(socket.gethostbyname(socket.getfqdn())))
 
 
         print("\nWarte auf erste Daten von Smartphone...")
