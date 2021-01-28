@@ -2,7 +2,7 @@ import threading
 import socket
 import time
 
-class RcvWifiModule(threading.Thread):
+class RCV_WIFI_MODULE(threading.Thread):
 
     def __init__(self):
         threading.Thread.__init__(self)
@@ -86,7 +86,7 @@ class RcvWifiModule(threading.Thread):
                         print("\nWifi Error: "+ str(e))
              
                         
-class SendWifiModule(threading.Thread):
+class SEND_WIFI_MODULE(threading.Thread):
 
     def __init__(self):
         threading.Thread.__init__(self)

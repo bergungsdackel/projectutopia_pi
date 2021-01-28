@@ -1,6 +1,6 @@
 import RPi.GPIO as GPIO
 
-class motorControl(object):
+class MOTOR_CONTROL(object):
 
     def __init__(self, enPinL: int,enPinR: int, inForewardPinL: int, inBackwardPinL: int,inForewardPinR: int, inBackwardPinR: int):
         

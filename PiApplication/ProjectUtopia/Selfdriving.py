@@ -3,7 +3,7 @@ import pid_control
 import gyro
 import motorControl
 
-class selfdriving(object):
+class SELFDRIVING(object):
   
     def __init__(self, GyroClass: gyro, Gyrokompensation, EchoClass: Echo, PidClass: pid_control):
     

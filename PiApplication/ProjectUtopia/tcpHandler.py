@@ -2,7 +2,7 @@ import threading
 import socket
 import time
 
-class tcpHandler(threading.Thread):
+class TCP_HANDLER(threading.Thread):
 
     def __init__(self):
         threading.Thread.__init__(self)

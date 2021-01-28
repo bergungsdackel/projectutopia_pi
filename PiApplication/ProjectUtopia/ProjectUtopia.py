@@ -5,7 +5,7 @@ import time
 import gyro
 import wifi
 import tcpHandler
-from motorControl import motorControl
+from motorControl import MOTOR_CONTROL
 import Echo
 import Selfdriving
 
@@ -26,18 +26,18 @@ Gyrokompensation = 0
 
 
 #alles zu wifi
-RcvWifiThread = wifi.RcvWifiModule()
-#SendWifiThread = wifi.SendWifiModule()
-#tcpHandlerClass = tcpHandler.tcpHandler()
+RcvWifiThread = wifi.RCV_WIFI_MODULE()
+#SendWifiThread = wifi.SEND_WIFI_MODULE()
+#tcpHandlerClass = tcpHandler.TCP_HANDLER()
 
 
-motorcontrol = motorControl(PinEnMotorLeft, PinEnMotorRight, PinMotorlinksvorwaerts, PinMotorlinksrueckwaerts, PinMotorrechtsvorwaerts, PinMotorrechtsrueckwaerts)
-EchoClass = Echo.Echo(PinEchoTrigger, PinEchoEcho)
-GyroClass = gyro.gyro()
+MOTOR_CONTROL_CLASS = MOTOR_CONTROL(PinEnMotorLeft, PinEnMotorRight, PinMotorlinksvorwaerts, PinMotorlinksrueckwaerts, PinMotorrechtsvorwaerts, PinMotorrechtsrueckwaerts)
+ECHO_CLASS = Echo.Echo(PinEchoTrigger, PinEchoEcho)
+GYRO_CLASS = gyro.gyro()
 
 #Platzhalter für Klassen
 PID_CONTROL_CLASS = None
-SelfdrivingClass = None
+SELFDRIVING_CLASS = None
 
 
 print ("Main-Class INIT finished.")
@@ -55,8 +55,8 @@ try:
                     Kd = RcvWifiThread.Kd            
                   
                     #Klassen init
-                    PID_CONTROL_CLASS = pid_control.pid_control(Kp, Ki, Kd, motorcontrol)
-                    SelfdrivingClass = Selfdriving.selfdriving(GyroClass, Gyrokompensation, EchoClass, PID_CONTROL_CLASS)
+                    PID_CONTROL_CLASS = pid_control.PID_CONTROL(Kp, Ki, Kd, MOTOR_CONTROL_CLASS)
+                    SELFDRIVING_CLASS = Selfdriving.SELFDRIVING(GYRO_CLASS, Gyrokompensation, ECHO_CLASS, PID_CONTROL_CLASS)
 
                     print("Const. INIT finished.")
 
@@ -70,17 +70,17 @@ try:
 
                 if(True):
                     #read gyroskop
-                    GyroClass.read_gyro()
+                    GYRO_CLASS.read_gyro()
 
-                    Distanz = EchoClass.Distanz #Debug
+                    Distanz = ECHO_CLASS.Distanz #Debug
                     print("Debug Distanz: " + str(Distanz)) #Debug
 
                     speed = RcvWifiThread.targetSpeedFB
                     turn = RcvWifiThread.rotateStrength
-                    PID_CONTROL_CLASS.reglung(GyroClass.x_rotation, speed, turn, Gyrokompensation)        
+                    PID_CONTROL_CLASS.reglung(GYRO_CLASS.x_rotation, speed, turn, Gyrokompensation)        
 
                 else:
-                    selfdrivingClass.drive()
+                    SELFDRIVING_CLASS.drive()
 
 
 
