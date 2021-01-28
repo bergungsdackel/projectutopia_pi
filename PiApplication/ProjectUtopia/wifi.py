@@ -37,8 +37,7 @@ class RcvWifiModule(threading.Thread):
         #global neueDaten
         #neueDaten = False
 
-
-        print("\nEigene IP: " + str(socket.gethostbyname(host_name + ".local")))
+        print("\nEigene IP: " + str(socket.gethostbyname(socket.gethostname() + ".local")))
 
 
         print("\nWarte auf erste Daten von Smartphone...")
