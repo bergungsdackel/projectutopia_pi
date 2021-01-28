@@ -9,40 +9,41 @@ from motorControl import motorControl
 import Echo
 import Selfdriving
 
-
-GPIO.setmode(GPIO.BOARD)
-PinMotorlinksvorwaerts = 29
-PinMotorrechtsvorwaerts = 31
-PinMotorlinksrueckwaerts = 33
-PinMotorrechtsrueckwaerts = 35
-PinEnMotorLeft = 37
-PinEnMotorRight = 38
-PinEchoTrigger = 8
-PinEchoEcho = 10
-Kp = 0.0
-Ki = 0.0
-Kd = 0.0
-Gyrokompensation = 0
-
-
-#alles zu wifi
-RcvWifiThread = wifi.RcvWifiModule()
-#SendWifiThread = wifi.SendWifiModule()
-#tcpHandlerClass = tcpHandler.tcpHandler()
-
-
-motorcontrol = motorControl(PinEnMotorLeft, PinEnMotorRight, PinMotorlinksvorwaerts, PinMotorlinksrueckwaerts, PinMotorrechtsvorwaerts, PinMotorrechtsrueckwaerts)
-EchoClass = Echo.Echo(PinEchoTrigger, PinEchoEcho)
-GyroClass = gyro.gyro()
-
-#Platzhalter für Klassen
-PID_CONTROL_CLASS = None
-SelfdrivingClass = None
-
-
-print ("Main-Class INIT finished.")
-
 try:
+
+    GPIO.setmode(GPIO.BOARD)
+    PinMotorlinksvorwaerts = 29
+    PinMotorrechtsvorwaerts = 31
+    PinMotorlinksrueckwaerts = 33
+    PinMotorrechtsrueckwaerts = 35
+    PinEnMotorLeft = 37
+    PinEnMotorRight = 38
+    PinEchoTrigger = 8
+    PinEchoEcho = 10
+    Kp = 0.0
+    Ki = 0.0
+    Kd = 0.0
+    Gyrokompensation = 0
+
+
+    #alles zu wifi
+    RcvWifiThread = wifi.RcvWifiModule()
+    #SendWifiThread = wifi.SendWifiModule()
+    #tcpHandlerClass = tcpHandler.tcpHandler()
+
+
+    motorcontrol = motorControl(PinEnMotorLeft, PinEnMotorRight, PinMotorlinksvorwaerts, PinMotorlinksrueckwaerts, PinMotorrechtsvorwaerts, PinMotorrechtsrueckwaerts)
+    EchoClass = Echo.Echo(PinEchoTrigger, PinEchoEcho)
+    GyroClass = gyro.gyro()
+
+    #Platzhalter für Klassen
+    PID_CONTROL_CLASS = None
+    SelfdrivingClass = None
+
+
+    print ("Main-Class INIT finished.")
+
+
     while True:
         try:
             if(Kp == 0.0 and Ki == 0.0 and Kd == 0.0):
