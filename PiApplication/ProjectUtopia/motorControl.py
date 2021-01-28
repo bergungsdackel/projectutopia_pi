@@ -2,19 +2,6 @@ import RPi.GPIO as GPIO
 
 class motorControl(object):
 
-    inForewardPinL = None
-    inForewardPinR = None
-    inBackwardPinL = None
-    inBackwardPinR = None
-    enPinR = None
-    enPinL = None
-    pwmL = None
-    pwmR = None
-    drivingForward = False
-    drivingBackward = False
-    drivingLeft = False
-    drivingRight = False
-
     def __init__(self, enPinL: int,enPinR: int, inForewardPinL: int, inBackwardPinL: int,inForewardPinR: int, inBackwardPinR: int):
         
         self.inForewardPinL = inForewardPinL
@@ -47,6 +34,7 @@ class motorControl(object):
 
 
     def setSpeedL(self, speed: int):
+
         """
             speed might be -15...+15
         """
@@ -67,7 +55,9 @@ class motorControl(object):
         else:
             self.pwmL.ChangeDutyCycle(0)
         
+
     def setSpeedR(self, speed: int):
+
         """
             speed might be -15...+15
         """
@@ -90,48 +80,42 @@ class motorControl(object):
         else:
             self.pwmR.ChangeDutyCycle(0)
 
+
     def setSpeed(self,speed: int):
+
         self.setSpeedL(speed)
         self.setSpeedR(speed)
         #print("Geschwindigkeit auf %f" % speed)
 
 
     def turnLeft(speed: int):
-        drivingForward = False
-        drivingBackward = False
-        drivingLeft = True
-        drivingRight = False
+
         setSpeedL(0)
         setSpeedR(speed)
         print("links drehen")
 
 
     def turnRight(speed: int):
-        drivingForward = False
-        drivingBackward = False
-        drivingLeft = False
-        drivingRight = True
+
         setSpeedR(0)
         setSpeedL(speed)
         print("rechts drehen")
 
+
     def forward(speed: int):
+
         if(speed > 0):
-            drivingForward = True
-            drivingBackward = False
-            drivingLeft = False
-            drivingRight = False
             setSpeed(speed)
             print("Vorwaerts")
 
+
     def backward(speed: int):
+
         if(speed < 0):
-            drivingForward = False
-            drivingBackward = True
-            drivingLeft = False
-            drivingRight = False
             setSpeed(speed)
             print("Rueckwaerts")
 
+
     def stopp():
+
         setSpeed(0)
