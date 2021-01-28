@@ -36,7 +36,7 @@ RcvWifiThread = wifi.RcvWifiModule()
 #tcpHandlerClass = tcpHandler.tcpHandler()
 EchoClass = Echo.Echo(PinEchoTrigger, PinEchoEcho)
 GyroClass = gyro.gyro()
-SelfdrivingClass = Selfdriving.selfdriving(motorcontrol, GyroClass, Gyrokompensation, EchoClass, Kp, Ki, Kd)
+SelfdrivingClass = Selfdriving.selfdriving(motorcontrol, GyroClass, Gyrokompensation, EchoClass, PID_CONTROL_CLASS, Kp, Ki, Kd)
 
 try:
     while True:
