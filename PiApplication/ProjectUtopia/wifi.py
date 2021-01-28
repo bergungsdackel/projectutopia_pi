@@ -17,9 +17,9 @@ class RcvWifiModule(threading.Thread):
         self.data = None
         self.targetSpeedFB = 0
         self.rotateStrength = 0
-        self.Kp = 0
-        self.Ki = 0
-        self.Kd = 0
+        self.Kp = 0.0
+        self.Ki = 0.0
+        self.Kd = 0.0
         self.neueDaten = False
         self.KonstantenReceived = False
         self.error = False
