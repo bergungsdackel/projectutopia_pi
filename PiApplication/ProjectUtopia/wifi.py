@@ -1,6 +1,7 @@
 import threading
 import socket
 import time
+import subprocess
 
 class RcvWifiModule(threading.Thread):
 
@@ -36,9 +37,15 @@ class RcvWifiModule(threading.Thread):
         #global neueDaten
         #neueDaten = False
 
-        hostname = socket.gethostname()
-        local_ip = socket.gethostbyname(hostname)
-        print("\nEigene IP: " + local_ip)
+
+        ip = subprocess.check_output(['hostname', '-I'])
+        if len(ip) >= 7:
+            ip4string = ip[:ip.index(" ")]
+        else:
+            ip4string = "-"
+        print("\nEigene IP: " + ip4string)
+
+
         print("\nWarte auf erste Daten von Smartphone...")
         while True:
 
