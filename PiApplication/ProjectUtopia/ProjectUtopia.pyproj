@@ -21,28 +21,28 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="barokompass.py" />
+    <Compile Include="BaroKompass.py" />
     <Compile Include="Echo.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="motorControl.py">
+    <Compile Include="MotorControl.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="PID.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="pid_control.py">
+    <Compile Include="PidControl.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="gyro.py">
+    <Compile Include="Gyro.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ProjectUtopia.py" />
     <Compile Include="Selfdriving.py" />
-    <Compile Include="tcpHandler.py">
+    <Compile Include="TcpHandler.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="wifi.py">
+    <Compile Include="Wifi.py">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

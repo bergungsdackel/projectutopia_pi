@@ -3,7 +3,7 @@ import math
 #debug
 import time
 
-class gyro(object):
+class GYRO(object):
 
     def __init__(self):
 

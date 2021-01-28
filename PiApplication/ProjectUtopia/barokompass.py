@@ -10,7 +10,7 @@ import time
 
 
 
-class barometer(object):
+class BAROMETER(object):
 
     def __init__(self):
 
@@ -64,7 +64,7 @@ class barometer(object):
         self.getaltitude()
         return self.altitude
 
-class kompass(object):
+class KOMPASS(object):
 
     def __init__(self):
      

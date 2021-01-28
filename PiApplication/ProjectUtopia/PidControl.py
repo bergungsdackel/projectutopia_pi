@@ -1,20 +1,25 @@
 import time
-import PID
-import motorControl
-import gyro
+
+from PID import PID
+from MotorControl import MOTOR_CONTROL
 
 
 class PID_CONTROL(object):
 
-    def __init__(self, Kp, Ki, Kd, motors: MOTOR_CONTROL):
+    def __init__(self, MotorControlClass: MOTOR_CONTROL, Kp, Ki, Kd):
 
+        #übergebene Variablen
         self.Kp = Kp
         self.Ki = Ki
         self.Kd = Kd
-        self.PID_CLASS = PID.PID(self.Kp, self.Ki, self.Kd)
-        self.MOTOR_CONTROL_CLASS = motors
         self.speedleft = 0
         self.speedright = 0
+
+        #übergebene Klassen
+        self.PID_CLASS = PID(self.Kp, self.Ki, self.Kd)
+        self.MOTOR_CONTROL_CLASS = MotorControlClass
+        
+        #debug:
         print("Kp = {0}".format(self.Kp))
         print("Ki = {0}".format(self.Ki))
         print("Kd = {0}".format(self.Kd))
@@ -46,12 +51,9 @@ class PID_CONTROL(object):
             self.PID_CLASS.regelerror = False
             
 
-    def reglung(self, x_rotation, speed: int, turn: int, Gyrokompensation: float):
+    def control(self, x_rotation, speed: int, turn: int, Gyrokompensation: float):
 
-        #self.PID_CLASS.pid(x_rotation)
-
-        #geregelterWert = self.PID_CLASS.Ausgang
-        if(self.PID_CLASS.regelerror == False):
+        if(self.PID_CLASS.controlError):
            print ("speed: %d" % speed)
            if (turn < 0 and speed > 0):
                 self.speedleft = max(0, speed + turn)

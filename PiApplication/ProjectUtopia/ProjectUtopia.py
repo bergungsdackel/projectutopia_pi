@@ -1,39 +1,40 @@
-import PID
-import pid_control
 import RPi.GPIO as GPIO
 import time
-import gyro
-import wifi
-import tcpHandler
-from motorControl import MOTOR_CONTROL
-import Echo
-import Selfdriving
+
+from PidControl import PID_CONTROL
+from Gyro import GYRO
+from Wifi import RCV_WIFI_MODULE
+from Wifi import SEND_WIFI_MODULE
+from TcpHandler import TCP_HANDLER
+from MotorControl import MOTOR_CONTROL
+from Echo import ECHO
+from Selfdriving import SELFDRIVING
 
 
 GPIO.setmode(GPIO.BOARD)
-PinMotorlinksvorwaerts = 29
-PinMotorrechtsvorwaerts = 31
-PinMotorlinksrueckwaerts = 33
-PinMotorrechtsrueckwaerts = 35
-PinEnMotorLeft = 37
-PinEnMotorRight = 38
-PinEchoTrigger = 8
-PinEchoEcho = 10
+pinMotorLeftForwards = 29
+pinMotorRightForwards = 31
+pinMotorLeftBackwards = 33
+pinMotorRightBackwards = 35
+pinEnMotorLeft = 37
+pinEnMotorRight = 38
+pinEchoTrigger = 8
+pinEchoEcho = 10
 Kp = 0.0
 Ki = 0.0
 Kd = 0.0
-Gyrokompensation = 0
+gyroCompensation = 0
 
 
 #alles zu wifi
-RcvWifiThread = wifi.RCV_WIFI_MODULE()
+RcvWifiThread = RCV_WIFI_MODULE()
 #SendWifiThread = wifi.SEND_WIFI_MODULE()
 #tcpHandlerClass = tcpHandler.TCP_HANDLER()
 
 
-MOTOR_CONTROL_CLASS = MOTOR_CONTROL(PinEnMotorLeft, PinEnMotorRight, PinMotorlinksvorwaerts, PinMotorlinksrueckwaerts, PinMotorrechtsvorwaerts, PinMotorrechtsrueckwaerts)
-ECHO_CLASS = Echo.Echo(PinEchoTrigger, PinEchoEcho)
-GYRO_CLASS = gyro.gyro()
+MOTOR_CONTROL_CLASS = MOTOR_CONTROL(pinEnMotorLeft, pinEnMotorRight, pinMotorLeftForwards, pinMotorLeftBackwards, pinMotorRightForwards, pinMotorRightBackwards)
+ECHO_CLASS = ECHO(PinEchoTrigger, PinEchoEcho)
+GYRO_CLASS = GYRO()
 
 #Platzhalter für Klassen
 PID_CONTROL_CLASS = None
@@ -55,8 +56,8 @@ try:
                     Kd = RcvWifiThread.Kd            
                   
                     #Klassen init
-                    PID_CONTROL_CLASS = pid_control.PID_CONTROL(Kp, Ki, Kd, MOTOR_CONTROL_CLASS)
-                    SELFDRIVING_CLASS = Selfdriving.SELFDRIVING(GYRO_CLASS, Gyrokompensation, ECHO_CLASS, PID_CONTROL_CLASS)
+                    PID_CONTROL_CLASS = PID_CONTROL(MOTOR_CONTROL_CLASS, Kp, Ki, Kd)
+                    SELFDRIVING_CLASS = SELFDRIVING(GYRO_CLASS, ECHO_CLASS, PID_CONTROL_CLASS, gyroCompensation)
 
                     print("Const. INIT finished.")
 
@@ -72,18 +73,15 @@ try:
                     #read gyroskop
                     GYRO_CLASS.read_gyro()
 
-                    Distanz = ECHO_CLASS.Distanz #Debug
-                    print("Debug Distanz: " + str(Distanz)) #Debug
+                    distance = ECHO_CLASS.distance #Debug
+                    print("Debug Distanz: " + str(distance)) #Debug
 
                     speed = RcvWifiThread.targetSpeedFB
                     turn = RcvWifiThread.rotateStrength
-                    PID_CONTROL_CLASS.reglung(GYRO_CLASS.x_rotation, speed, turn, Gyrokompensation)        
+                    PID_CONTROL_CLASS.control(GYRO_CLASS.x_rotation, speed, turn, gyroCompensation)        
 
                 else:
                     SELFDRIVING_CLASS.drive()
-
-
-
 
 
         except Exception as e:
@@ -91,9 +89,11 @@ try:
             GPIO.cleanup()
             break
 
+
 except Exception as e:
     print("Main-Error: "+str(e))
     GPIO.cleanup()
+
 
 finally:
     GPIO.cleanup()

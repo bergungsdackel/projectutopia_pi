@@ -3,39 +3,55 @@ import time
 class PID(object):
 
     def __init__(self, Kp:float, Ki:float, Kd:float):
+        
+        #übergebene Variablen
         self.Kp = Kp
         self.Ki = Ki
         self.Kd = Kd
+        
+        #Variablen intiieren
+        self.output = 0.0
+        self.buffer = 0.0
+        self.difference = 0.0
+        self.difference_before = 0.0
+        self.controlError = False
 
-        self.Buffer = 0.0
-        self.Eingang_vorher = 0.0
-        self.zeitfüreinendurchlauf = 0.00009
-        self.Ausgang = 0.0
-        self.Regeldifferenz = 0.0
-        self.Regeldifferenz_vorher = 0.0
+        #Gemessen
+        self.timeForARun = 0.00009
+
+        #muss noch angepasst werden
         self.maxBuffer = 100.0
-        self.maxAusgang = 30.0
-        self.regelerror = False
+        self.maxOutput = 30.0
+
 
         print("PID iniziiert")
         
-    def pid(self, Eingang, Sollwert, Gyrokompensation:float):
+    def pid(self, input, Sollwert, gyroCompensation:float):
 
-        kompEingang = Eingang - Gyrokompensation
-        self.Regeldifferenz = Sollwert - self.Ausgang
-        self.Buffer = self.Regeldifferenz * self.zeitfüreinendurchlauf + self.Buffer
-        self.Ausgang = kompEingang + self.Ausgang + self.Kp * self.Regeldifferenz + self.Ki * self.Buffer  + self.Kd * ((self.Regeldifferenz - self.Regeldifferenz_vorher) / self.zeitfüreinendurchlauf)
-        self.Regeldifferenz_vorher = self.Regeldifferenz
-        print("Ausgang = %f" % self.Ausgang)
-        if(self.Buffer > self.maxBuffer):
-            self.Buffer = self.maxBuffer
-        if(self.Buffer < -self.maxBuffer):
-            self.Buffer = -self.maxBuffer
-        if(self.Ausgang > self.maxAusgang):
-            self.Ausgang = self.maxAusgang
-            self.regelerror = True
-        if(self.Ausgang < -self.maxAusgang):
-            self.Ausgang = -self.maxAusgang
-            self.regelerror = True
+        compensatedInput = input - gyroCompensation
+        self.difference = Sollwert - self.output
+        self.buffer = self.difference * self.timeForARun + self.buffer
+        
+        #Haupt PID
+        self.output = compensatedInput + self.output + self.Kp * self.difference + self.Ki * self.buffer  + self.Kd * ((self.difference - self.difference_before) / self.timeForARun)
+        
+        self.difference_before = self.difference
 
+        #Abfangen extremer Werte
+        if(self.buffer > self.maxBuffer):
+            self.buffer = self.maxBuffer
+
+        if(self.buffer < -self.maxBuffer):
+            self.buffer = -self.maxBuffer
+
+        if(self.output > self.maxOutput):
+            self.output = self.maxOutput
+            self.controlError = True
+
+        if(self.output < -self.maxOutput):
+            self.output = -self.maxOutput
+            self.controlError = True
+        
+        print("Ausgang = %f" % self.output)
+        
         return self.Ausgang

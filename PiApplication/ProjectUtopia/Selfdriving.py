@@ -1,24 +1,25 @@
-import Echo
-import pid_control
-import gyro
-import motorControl
+from Echo import ECHO
+from PidControl import PID_CONTROL
+from Gyro import GYRO
+from MotorControl import MOTOR_CONTROL
 
 class SELFDRIVING(object):
   
-    def __init__(self, GyroClass: gyro, Gyrokompensation, EchoClass: Echo, PidClass: pid_control):
+    def __init__(self, GyroClass: GYRO, EchoClass: ECHO, PidClass: PID_CONTROL, gyroCompensation):
     
+        #übergebene Variablen
+        self.gyroCompensation = gyroCompensation  
+        
         #übergebene Klassen
         self.ECHO_CLASS = EchoClass
         self.PID_CONTROL_CLASS = PidClass
         self.GYRO_CLASS = GyroClass
-    
-        #übergebene Variablen
-        self.gyrokompensation = Gyrokompensation
+
 
 
     def detect(self):
 
-        if(self.ECHO_CLASS.Distanz < 40):
+        if(self.ECHO_CLASS.distance < 40):
             return True
         else:
             return False
@@ -26,7 +27,7 @@ class SELFDRIVING(object):
 
     def drive(self):
 
-        if(self.detect()==False):
-            self.PID_CONTROL_CLASS.reglung(self.GYRO_CLASS.x_rotation, 5, 0, self.gyrokompensation)
+        if(self.detect() == False):
+            self.PID_CONTROL_CLASS.control(self.GYRO_CLASS.x_rotation, 5, 0, self.gyroCompensation)
         else:
-            self.PID_CONTROL_CLASS.reglung(self.GYRO_CLASS.x_rotation, 1, 1, self.gyrokompensation)
+            self.PID_CONTROL_CLASS.control(self.GYRO_CLASS.x_rotation, 1, 1, self.gyroCompensation)

@@ -2,20 +2,20 @@ import RPi.GPIO as GPIO
 import time
 import threading
 
-class Echo(threading.Thread):
+class ECHO(threading.Thread):
     
     def __init__(self, trigger, echo):
 
         threading.Thread.__init__(self)
         self.daemon = True
 
-        GPIO.setup(trigger, GPIO.OUT)
-        GPIO.setup(echo, GPIO.IN)
         self.trigger = trigger
         self.echo = echo
-        GPIO.output(trigger,False)
+        self.distance = 0.0
 
-        self.Distanz = 0.0
+        GPIO.setup(self.trigger, GPIO.OUT)
+        GPIO.setup(self.echo, GPIO.IN)
+        GPIO.output(self.trigger, False)
 
         self.start()
 
@@ -25,20 +25,20 @@ class Echo(threading.Thread):
 
         while True:
 
-            GPIO.output(self.trigger,True)
+            GPIO.output(self.trigger, True)
             time.sleep(0.00001)
-            GPIO.output(self.trigger,False)
-            startzeit = time.time()
-            stopzeit = time.time()
+            GPIO.output(self.trigger, False)
+            starttime = time.time()
+            stoptime = time.time()
             while (GPIO.input(self.echo)==0):
 
-                startzeit = time.time()
+                starttime = time.time()
 
             while (GPIO.input(self.echo)==1):
 
-                stopzeit = time.time()
+                stoptime = time.time()
 
-            Dauer = stopzeit - startzeit
-            self.Distanz = (Dauer * 34300) / 2
+            duration = stoptime - starttime
+            self.distance = (duration * 34300) / 2
 
             time.sleep(0.5)
