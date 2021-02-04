@@ -1,12 +1,12 @@
 import RPi.GPIO as GPIO
 import time
 
+from MotorControl import MOTOR_CONTROL
 from PidControl import PID_CONTROL
 from Gyro import GYRO
 from Wifi import RCV_WIFI_MODULE
 from Wifi import SEND_WIFI_MODULE
 from TcpHandler import TCP_HANDLER
-from MotorControl import MOTOR_CONTROL
 from Echo import ECHO
 from Selfdriving import SELFDRIVING
 

@@ -25,6 +25,9 @@
     <Compile Include="Echo.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Gps.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="MotorControl.py">
       <SubType>Code</SubType>
     </Compile>
