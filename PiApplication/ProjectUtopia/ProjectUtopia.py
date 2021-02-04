@@ -33,7 +33,7 @@ RcvWifiThread = RCV_WIFI_MODULE()
 
 
 MOTOR_CONTROL_CLASS = MOTOR_CONTROL(pinEnMotorLeft, pinEnMotorRight, pinMotorLeftForwards, pinMotorLeftBackwards, pinMotorRightForwards, pinMotorRightBackwards)
-ECHO_CLASS = ECHO(PinEchoTrigger, PinEchoEcho)
+ECHO_CLASS = ECHO(pinEchoTrigger, pinEchoEcho)
 GYRO_CLASS = GYRO()
 
 #Platzhalter für Klassen
